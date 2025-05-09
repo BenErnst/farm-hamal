@@ -1,0 +1,23 @@
+@use '../setup/variables';
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    min-height: 100vh;
+    background-color: variables.$bodyBg;
+    color: variables.$secondaryTxt;
+    font-family: Arial, sans-serif, Helvetica;
+}
+
+button {
+    cursor: pointer;
+}
