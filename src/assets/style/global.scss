@@ -5,8 +5,8 @@
 @use 'basics/base';
 @use 'basics/typography';
 
-// Pages
-@use 'pages/home';
-
 // Components
+@use 'components/home';
 @use 'components/app-header';
+@use 'components/form-elements-panel';
+@use 'components/custom-form';

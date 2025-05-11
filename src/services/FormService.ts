@@ -1,29 +1,35 @@
-import type { FormElement } from "../types/FormElement"
+import type { Element } from "../types/Element"
+import { UtilService } from "./UtilService"
+
 
 export const FormService = {
-    getFormElements
+    getElements
 }
 
 
-function getFormElements(): FormElement[] {
+const { makeId } = UtilService;
+
+
+function getElements(): Element[] {
     return [
         {
-            element: 'input',
-            type: 'text',
+            id: makeId(),
+            type: 'TextInput',
             name: '',
-            label: ''
+            value: ''
         },
         {
-            element: 'input',
-            type: 'checkbox',
+            id: makeId(),
+            type: 'Checkbox',
             name: '',
-            label: ''
+            value: false
         },
         {
-            element: 'select',
-            options: [],
+            id: makeId(),
+            type: 'Select',
             name: '',
-            label: ''
+            value: '',
+            options: []
         },
     ]
 }

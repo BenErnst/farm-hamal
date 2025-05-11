@@ -13,7 +13,7 @@ export function EntityReducer(state = INITIAL_STATE, action: EntityAction): Glob
         case 'ADD_ENTITY':
             return {
                 ...state,
-                entities: [...state.entities, action.addedEntity]
+                entities: [...state.entities, action.entityToAdd]
             };
 
         default:

@@ -8,4 +8,4 @@ export interface GlobalState {
     entities: Entity[]
 }
 
-export type EntityAction = { type: 'ADD_ENTITY'; addedEntity: Entity }
+export type EntityAction = { type: 'ADD_ENTITY'; entityToAdd: Entity }
