@@ -20,7 +20,7 @@ function getElements(): Element[] {
         },
         {
             id: makeId(),
-            type: 'Checkbox',
+            type: 'CheckBox',
             name: '',
             value: false
         },

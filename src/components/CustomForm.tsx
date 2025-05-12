@@ -3,6 +3,8 @@ import type { Element } from "../types/Element";
 import { FormElement } from "./FormElement";
 import { useAppDispatch } from "../hooks/useStoreTypes";
 import { addEntity } from "../store/actions/EntityActions";
+import { UtilService } from "../services/UtilService";
+import type { Entity } from "../types/Entity";
 
 
 interface Props {
@@ -21,38 +23,43 @@ export const CustomForm = (props: Props) => {
         const newEntity = currElements.reduce((acc, element) => {
             acc[element.name] = element.value;
             return acc;
-        }, {});
+        }, {}) as Entity;
+        newEntity.id = UtilService.makeId();
         dispatch(addEntity(newEntity));
+        setCurrElements([]);
     }
 
 
-    // const getElementComponent = (element: Element) => {
-    //     return element.type === 'TextInput' ? <TextInput /> : element.type === 'Checkbox' ? <Checkbox /> : <Select />;
-    // }
-
-
     const isFormNotFilled = () => {
-        const textElements = currElements.filter(element => element.type !== 'Checkbox');
-        return textElements.some(element => element.value === '');
+        // const textElements = currElements.filter(element => element.type !== 'Checkbox');
+        return !currElements.length || currElements.some(element => element.value === '' || element.name === '');
     }
 
 
     return (
         <form className="custom-form-container" onSubmit={submit}>
 
-            <h1>CustomForm</h1>
+            <div>
 
-            {currElements.length ? currElements.map((element: Element) => (
-                <FormElement
-                    element={element}
-                    setCurrElements={setCurrElements}
-                    key={element.id}
-                />
-            )) : null}
+                <h2>Form</h2>
 
-            <button type="submit" disabled={isFormNotFilled()}>
-                {'Submit'}
-            </button>
+                <div>
+                    {currElements.length ? currElements.map((element: Element) => (
+                        <FormElement
+                            element={element}
+                            setCurrElements={setCurrElements}
+                            key={element.id}
+                        />
+                    )) : null}
+                </div>
+
+            </div>
+
+            <div className="submit-btn-container">
+                <button type="submit" disabled={isFormNotFilled()}>
+                    {'Submit'}
+                </button>
+            </div>
 
         </form>
     )

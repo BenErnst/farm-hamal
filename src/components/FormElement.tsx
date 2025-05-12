@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextInput } from "./TextInput";
-import { Checkbox } from "./Checkbox";
+import { CheckBox } from "./Checkbox";
 import { Select } from "./Select";
 import { ElementLabel } from "./ElementLabel";
 import type { Element } from "../types/Element";
@@ -14,6 +14,7 @@ interface Props {
 
 export const FormElement = (props: Props) => {
     const { element, setCurrElements } = props;
+
 
     const updateElement = (elementToUpdate: Element) => {
         setCurrElements(prevElements => {
@@ -35,24 +36,23 @@ export const FormElement = (props: Props) => {
     }
 
 
-    // const getElementIndex = (elements: Element[],elementToUpdate) => {
-    //     return elements.findIndex(el => el.id === element.id);
-    // }
-
-
     return (
         <div className="form-element-container">
+
+            <h4>{element.type}</h4>
 
             <ElementLabel element={element} updateElement={updateElement} />
 
             {element.type === 'TextInput' ? <TextInput element={element} updateElement={updateElement} />
-                : element.type === 'Checkbox' ? <Checkbox element={element} updateElement={updateElement} />
+                : element.type === 'CheckBox' ? <CheckBox element={element} updateElement={updateElement} />
                     : <Select element={element} updateElement={updateElement} />
             }
 
-            <button onClick={removeElement} type="button">
-                {'Remove'}
-            </button>
+            <div className="remove-btn-container">
+                <button onClick={removeElement} type="button">
+                    {'Remove'}
+                </button>
+            </div>
 
         </div>
     )

@@ -1,3 +1,4 @@
+import { PanelMenu } from 'primereact/panelmenu';
 import { useMemo, type Dispatch, type SetStateAction } from "react";
 import { FormService } from "../services/FormService";
 import { UtilService } from "../services/UtilService";
@@ -11,7 +12,17 @@ interface Props {
 
 export const ElementsPanel = (props: Props) => {
     const { setCurrElements } = props;
-    const elements = useMemo(() => FormService.getElements(), []);
+    const items = useMemo(() => {
+        const elements = FormService.getElements();
+        return elements.map(element => ({
+            command: () => injectElement(element),
+            template: (
+                <div style={{ textAlign: 'center' }}>
+                    <h3>{element.type}</h3>
+                </div>
+            )
+        }))
+    }, []);
 
 
     const injectElement = (element: Element) => {
@@ -22,15 +33,8 @@ export const ElementsPanel = (props: Props) => {
 
 
     return (
-        <div className="form-elements-panel-container">
-            {elements.map(element => (
-                <button
-                    onClick={() => injectElement(element)}
-                    key={element.id}
-                >
-                    {element.type}
-                </button>
-            ))}
+        <div className="elements-panel-container">
+            <PanelMenu model={items} />
         </div>
     )
 }

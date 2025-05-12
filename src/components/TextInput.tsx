@@ -1,5 +1,6 @@
 import type { ChangeEvent } from "react";
 import type { Element } from "../types/Element";
+import { InputText } from 'primereact/inputtext';
 
 
 interface Props {
@@ -20,7 +21,7 @@ export const TextInput = (props: Props) => {
 
 
     return (
-        <input
+        <InputText
             type='text'
             id={element.id}
             name={element.name}

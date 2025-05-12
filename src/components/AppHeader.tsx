@@ -1,7 +1,11 @@
+import { Toolbar } from 'primereact/toolbar';
+
+
 export const AppHeader = () => {
     return (
-        <div className="app-header-container">
-            <h1>{'Custom Form App'}</h1>
-        </div>
+        <Toolbar
+            className="app-header-container"
+            center={<h1>{'Custom Form App'}</h1>}
+        />
     )
 }

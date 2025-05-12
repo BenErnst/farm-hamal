@@ -1,5 +1,6 @@
 import type { ChangeEvent } from "react";
 import type { Element } from "../types/Element";
+import { Checkbox } from 'primereact/checkbox';
 
 
 interface Props {
@@ -8,13 +9,13 @@ interface Props {
 }
 
 
-export const Checkbox = (props: Props) => {
+export const CheckBox = (props: Props) => {
     const { element, updateElement } = props;
 
 
-    const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (ev) => {
         const elementCopy = { ...element };
-        elementCopy.value = ev.target.checked;
+        elementCopy.value = ev.checked;
         updateElement(elementCopy);
     }
 
@@ -22,7 +23,7 @@ export const Checkbox = (props: Props) => {
     return (
         <>
             {element.name && (
-                <input
+                <Checkbox
                     type='checkbox'
                     id={element.id}
                     name={element.name}

@@ -12,14 +12,16 @@ export const Home = () => {
 
     return (
         <div className="home-container">
-            <ElementsPanel
-                setCurrElements={setCurrElements}
-            />
-            <CustomForm
-                currElements={currElements}
-                setCurrElements={setCurrElements}
-            />
-            <EntityList />
+            <main>
+                <ElementsPanel
+                    setCurrElements={setCurrElements}
+                />
+                <CustomForm
+                    currElements={currElements}
+                    setCurrElements={setCurrElements}
+                />
+                <EntityList />
+            </main>
         </div>
     );
 };

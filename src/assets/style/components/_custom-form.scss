@@ -1,7 +1,65 @@
 .custom-form-container {
-    background: orangered;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    height: 100%;
+    scrollbar-width: thin;
+    h2 {
+        margin: 10px;
+    }
     .form-element-container {
-        margin: 30px 0;
-        border: 2px solid black;
+        width: 50%;
+        margin: 10px auto;
+        box-shadow: 0 0 3px 0px black;
+        padding: 1px;
+        h4 {
+            margin: 10px 0 5px;
+        }
+        .form-element-label-container {
+            margin: 10px 0;
+            section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1px;
+            }       
+        }
+        input:not([type="checkbox"]) {
+            padding: 3px;
+            width: 180px;
+        }
+        .remove-btn-container {
+            margin: 7px 0;
+        }
+        .select-container {
+            section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 5px 0;
+                gap: 1px;
+                label {
+                   font-size: 12px;
+                }
+            }
+            .p-dropdown-label {
+                font-size: 12px;
+            }
+        }
+    }
+    .submit-btn-container {
+        margin: 10px 0;
+        button {
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    }
+}
+
+.p-dropdown-items {
+    li {
+        font-size: 12px;
     }
 }

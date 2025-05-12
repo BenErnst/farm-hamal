@@ -2,7 +2,14 @@ import type { GlobalState, EntityAction } from "../../types/Store";
 
 
 const INITIAL_STATE = {
-    entities: []
+    entities: [
+        {
+            id: 'b_123',
+            fullname: 'Ben Ernst',
+            isMale: true,
+            team: 'MTA'
+        }
+    ]
 } as GlobalState;
 
 

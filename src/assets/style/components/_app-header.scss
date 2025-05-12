@@ -1,12 +1,10 @@
 @use '../setup/variables';
 
 .app-header-container {
-    background: #124f77;
     color: variables.$primaryTxt;
-    height: 6vh;
-    display: flex;
+    height: 8vh;
+    line-height: 1;
     h1 {
         margin: auto;
-        font-family: ui-monospace;
     }
 }

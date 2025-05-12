@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Element } from "../types/Element";
+import { InputText } from 'primereact/inputtext';
 
 
 interface Props {
@@ -27,10 +28,10 @@ export const ElementLabel = (props: Props) => {
                     {element.name}
                 </label>
             ) : (
-                <div>
-                    <input type="text" value={elementName} onChange={(ev) => setElementName(ev.target.value)} />
+                <section>
+                    <InputText type="text" value={elementName} onChange={(ev) => setElementName(ev.target.value)} />
                     <button onClick={updateElementName} type="button">Set Name</button>
-                </div>
+                </section>
             )}
         </div>
     )

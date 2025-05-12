@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 import type { Element } from "../types/Element";
+import { Dropdown } from 'primereact/dropdown';
 
 
 interface Props {
@@ -26,9 +27,9 @@ export const Select = (props: Props) => {
     }
 
 
-    const handleChangeOption = (ev: ChangeEvent<HTMLSelectElement>) => {
+    const handleChangeOption = (ev) => {
         const elementCopy = getElementCopy();
-        elementCopy.value = ev.target.value;
+        elementCopy.value = ev.value;
         updateElement(elementCopy);
     }
 
@@ -39,17 +40,17 @@ export const Select = (props: Props) => {
 
 
     return (
-        <div>
+        <div className="select-container">
 
             {element.name && !element.options?.length ? (
-                <div>
+                <section>
                     <label>Enter options seperated by commas</label>
                     <textarea value={optionsStr} onChange={(ev) => setOptionsStr(ev.target.value)} />
                     <button onClick={setOptions} type="button">Set Options</button>
-                </div>
+                </section>
             ) : null}
 
-            <select
+            {/* <select
                 id={element.id}
                 name={element.name}
                 onChange={handleChangeOption}
@@ -61,7 +62,17 @@ export const Select = (props: Props) => {
                         {option.alias}
                     </option>
                 ))}
-            </select>
+            </select> */}
+
+            <Dropdown
+                id={element.id}
+                name={element.name}
+                value={element.value}
+                onChange={handleChangeOption}
+                options={element.options}
+                optionLabel="alias"
+                placeholder="Choose an Option"
+            />
 
         </div>
     )
