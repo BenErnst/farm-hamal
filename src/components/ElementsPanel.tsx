@@ -26,6 +26,7 @@ export const ElementsPanel = (props: Props) => {
 
 
     const injectElement = (element: Element) => {
+        // injecting the element to the form
         const newElement = { ...element };
         newElement.id = UtilService.makeId();
         setCurrElements(prevElements => [...prevElements, newElement]);

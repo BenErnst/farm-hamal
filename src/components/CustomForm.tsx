@@ -31,8 +31,9 @@ export const CustomForm = (props: Props) => {
 
 
     const isFormNotFilled = () => {
-        // const textElements = currElements.filter(element => element.type !== 'Checkbox');
-        return !currElements.length || currElements.some(element => element.value === '' || element.name === '');
+        const noElements = !currElements.length;
+        const isSomethingEmpty = currElements.some(element => element.value === '' || element.name === '');
+        return noElements || isSomethingEmpty;
     }
 
 

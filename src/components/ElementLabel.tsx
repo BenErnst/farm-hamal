@@ -30,7 +30,7 @@ export const ElementLabel = (props: Props) => {
             ) : (
                 <section>
                     <InputText type="text" value={elementName} onChange={(ev) => setElementName(ev.target.value)} />
-                    <button onClick={updateElementName} type="button">Set Name</button>
+                    <button onClick={updateElementName} type="button">Set Field</button>
                 </section>
             )}
         </div>

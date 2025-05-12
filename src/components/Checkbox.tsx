@@ -1,6 +1,5 @@
-import type { ChangeEvent } from "react";
-import type { Element } from "../types/Element";
 import { Checkbox } from 'primereact/checkbox';
+import type { Element } from "../types/Element";
 
 
 interface Props {

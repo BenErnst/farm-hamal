@@ -50,20 +50,6 @@ export const Select = (props: Props) => {
                 </section>
             ) : null}
 
-            {/* <select
-                id={element.id}
-                name={element.name}
-                onChange={handleChangeOption}
-                disabled={!element.name || !element.options?.length}
-            >
-                <option value="">{`Choose ${element.name}`}</option>
-                {element.options?.map(option => (
-                    <option value={option.value} key={option.value}>
-                        {option.alias}
-                    </option>
-                ))}
-            </select> */}
-
             <Dropdown
                 id={element.id}
                 name={element.name}

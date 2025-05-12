@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { TextInput } from "./TextInput";
-import { CheckBox } from "./Checkbox";
-import { Select } from "./Select";
-import { ElementLabel } from "./ElementLabel";
 import type { Element } from "../types/Element";
+import { CheckBox } from "./Checkbox";
+import { ElementLabel } from "./ElementLabel";
+import { Select } from "./Select";
+import { TextInput } from "./TextInput";
 
 
 interface Props {

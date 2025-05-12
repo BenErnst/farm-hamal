@@ -1,6 +1,5 @@
 import { Toolbar } from 'primereact/toolbar';
 
-
 export const AppHeader = () => {
     return (
         <Toolbar
