@@ -10,6 +10,12 @@ export function EventReducer(state = INITIAL_STATE, action): GlobalEventState {
 
     switch (action.type) {
 
+        case 'SET_EVENTS':
+            return {
+                ...state,
+                events: [...action.events]
+            };
+
         // case 'ADD_EVENT':
         //     return {
         //         ...state,

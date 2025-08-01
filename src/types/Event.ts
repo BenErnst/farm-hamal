@@ -1,10 +1,12 @@
+import type { Location } from "./Location"
+
 export interface Event {
     id: string
     location: Location
     type: EventType
     status: EventStatus
-    createdAt: number
-    completedAt: number
+    createdAt: number | null
+    completedAt: number | null
 }
 
 type EventType =
@@ -17,6 +19,6 @@ type EventType =
 
 
 type EventStatus =
-    | 'טרם טופל' // Pending
-    | 'בטיפול' // InProgress
-    | 'טופל' // Completed
+    | 'pending' // טרם טופל
+    | 'inProgress' // בטיפול
+    | 'completed' // טופל

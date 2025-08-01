@@ -1,4 +1,20 @@
+import { EventService } from "../../services/EventService";
+import type { Event } from "../../types/event";
+import type { AppDispatch } from "../../types/Store";
 
+
+export function loadEvents() {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const events: Event[] = await EventService.getAll();
+            const action = { type: 'SET_EVENTS', events };
+            dispatch(action);
+        } catch (err) {
+            console.error('Error in loadEvents Action:', err);
+            throw err;
+        }
+    }
+}
 
 // export function addEvent(eventToAdd: Event) {
 //     return async (dispatch: AppDispatch) => {

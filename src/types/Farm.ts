@@ -1,18 +1,20 @@
 import type { Event } from "./event"
+import type { Location } from "./Location"
 
 export interface Farm {
     id: string
     name: string
     location: Location
+    region: Region
     type: FarmType
     farmer: Farmer
     eventsIds: Event['id'][]
 }
 
-interface Location {
-    latitude: number
-    longitude: number
-}
+type Region =
+    | 'north' // צפון
+    | 'center' // מרכז
+    | 'south' // דרום
 
 type FarmType =
     | 'cattleFarm' // חוות בקר
