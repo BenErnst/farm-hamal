@@ -4,7 +4,7 @@ export const AppHeader = () => {
     return (
         <Toolbar
             className="app-header-container"
-            center={<h1>{'Custom Form App'}</h1>}
+            center={<h1>{'חמ"ל חקלאים'}</h1>}
         />
     )
 }

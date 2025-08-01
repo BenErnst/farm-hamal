@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import { EntityReducer } from './reducers/EntityReducer';
+import { FarmReducer } from './reducers/FarmReducer';
+import { EventReducer } from './reducers/EventReducer';
 
 const rootReducer = combineReducers({
-    entityModule: EntityReducer
+    farmModule: FarmReducer,
+    eventModule: EventReducer
 });
 
 export const store = configureStore({
