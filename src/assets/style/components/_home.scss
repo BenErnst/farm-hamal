@@ -1,7 +1,7 @@
 .home-container {
     height: 90vh;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     main {
         display: flex;
         height: 100%;

@@ -30,7 +30,7 @@ const he = {
 
 export const UtilService = {
     // makeId,
-    he
+    he,
 }
 
 // function makeId(length = 7) {

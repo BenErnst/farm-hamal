@@ -1,5 +1,6 @@
 import { EventTable } from "./EventTable"
 import { FarmList } from "./FarmList"
+import { FarmMap } from "./FarmMap"
 
 export const Home = () => {
     return (
@@ -9,7 +10,7 @@ export const Home = () => {
                 <FarmList />
                 {/* <Dashboard /> */}
             </main>
-            {/* <Map /> */}
+            <FarmMap />
         </div>
     )
 }

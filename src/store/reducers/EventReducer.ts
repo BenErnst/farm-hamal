@@ -22,6 +22,14 @@ export function EventReducer(state = INITIAL_STATE, action): GlobalEventState {
         //         events: [...state.events, action.eventToAdd]
         //     };
 
+        case 'UPDATE_EVENT':
+            return {
+                ...state,
+                events: state.events.map(event => {
+                    return event.id === action.updatedEvent.id ? action.updatedEvent : event;
+                })
+            }
+
         default:
             return state;
     }

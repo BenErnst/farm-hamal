@@ -36,6 +36,8 @@ export const EventTable = () => {
                 <Column field="status" header="סטטוס" />
                 <Column field="createdAt" header="נוצר ב-" />
                 <Column field="completedAt" header="הסתיים ב-" />
+                <Column field="location.lng" header="lng" />
+                <Column field="location.lat" header="lat" />
             </DataTable>
         </div>
     )

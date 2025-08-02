@@ -6,7 +6,7 @@ import { UtilService } from "./UtilService";
 export const EventService = {
     getAll,
     // Add,
-    // Edit,
+    Update,
     // Remove
 }
 
@@ -15,17 +15,16 @@ const { he } = UtilService;
 
 
 async function getAll(): Promise<Event[]> {
-    const res = new Promise((resolve) => {
+    return await new Promise((resolve) => {
         let eventsJson = StorageService.load('events') as string | null;
         if (!eventsJson) {
             const events = getInitialEvents();
             StorageService.save('events', events);
             eventsJson = StorageService.load('events') as string;
         }
-        resolve(JSON.parse(eventsJson));
+        const allEvents = JSON.parse(eventsJson) as Event[];
+        resolve(allEvents);
     });
-    const allEvents = await res as Event[];
-    return allEvents;
 }
 
 
@@ -43,18 +42,16 @@ async function getAll(): Promise<Event[]> {
 // }
 
 
-// async function Edit(productToEdit: Product): Promise<Product> {
-//     const res = new Promise((resolve) => {
-//         const products = getParsedProducts();
-//         const productToEditIdx = products.findIndex(product => product._id === productToEdit._id);
-//         products.splice(productToEditIdx, 1, productToEdit);
-//         StorageService.save('products', products);
-//         const editedProduct = products.find(product => product._id === productToEdit._id);
-//         resolve(editedProduct);
-//     });
-//     const editedProduct = await res as Product;
-//     return editedProduct;
-// }
+async function Update(eventToUpdate: Event): Promise<Event> {
+    return await new Promise((resolve) => {
+        const events = getParsedEvents();
+        const eventToUpdateIdx = events.findIndex(event => event.id === eventToUpdate.id);
+        events.splice(eventToUpdateIdx, 1, eventToUpdate);
+        StorageService.save('events', events);
+        const updatedEvent = events.find(event => event.id === eventToUpdate.id) as Event;
+        resolve(updatedEvent);
+    });
+}
 
 
 // async function Remove(productToRemove: Product): Promise<Product['_id']> {
@@ -70,18 +67,18 @@ async function getAll(): Promise<Event[]> {
 // }
 
 
-// function getParsedProducts() {
-//     const productsJson = StorageService.load('products') as string;
-//     const products = JSON.parse(productsJson) as Product[];
-//     return products;
-// }
+function getParsedEvents() {
+    const eventsJson = StorageService.load('events') as string;
+    const events = JSON.parse(eventsJson) as Event[];
+    return events;
+}
 
 
 function getInitialEvents() {
     return [
         {
             id: 'e_1',
-            location: { latitude: 32.68217, longitude: 35.39980 },
+            location: { lng: 35.40185993652345, lat: 32.67866168499153 },
             type: he.eventType.theft,
             status: he.eventStatus.pending,
             createdAt: 1751363442000,
@@ -89,7 +86,7 @@ function getInitialEvents() {
         },
         {
             id: 'e_2',
-            location: { latitude: 32.61884, longitude: 35.21226 },
+            location: { lng: 35.18210124183654, lat: 32.57578817544346 },
             type: he.eventType.fenceCut,
             status: he.eventStatus.inProgress,
             createdAt: 1751709042000,
@@ -97,7 +94,7 @@ function getInitialEvents() {
         },
         {
             id: 'e_3',
-            location: { latitude: 32.68217, longitude: 35.39980 },
+            location: { lng: 35.40483182411195, lat: 32.67987629098312 },
             type: he.eventType.gunfire,
             status: he.eventStatus.completed,
             createdAt: 1751795442000,

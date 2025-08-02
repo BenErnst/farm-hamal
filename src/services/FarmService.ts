@@ -15,17 +15,16 @@ const { he } = UtilService;
 
 
 async function getAll(): Promise<Farm[]> {
-    const res = new Promise((resolve) => {
+    return await new Promise((resolve) => {
         let farmsJson = StorageService.load('farms') as string | null;
         if (!farmsJson) {
             const farms = getInitialFarms();
             StorageService.save('farms', farms);
             farmsJson = StorageService.load('farms') as string;
         }
-        resolve(JSON.parse(farmsJson));
+        const allFarms = JSON.parse(farmsJson) as Farm[];
+        resolve(allFarms);
     });
-    const allFarms = await res as Farm[];
-    return allFarms;
 }
 
 
@@ -82,7 +81,7 @@ function getInitialFarms() {
         {
             id: 'f_1',
             name: 'בוקרי התבור',
-            location: { latitude: 32.68217, longitude: 35.39980 },
+            location: { lng: 35.40264, lat: 32.67867 },
             region: he.farmRegion.north,
             type: he.farmType.cattleFarm,
             farmer: {
@@ -95,7 +94,7 @@ function getInitialFarms() {
         {
             id: 'f_2',
             name: 'עגבניות מגידו',
-            location: { latitude: 32.61884, longitude: 35.21226 },
+            location: { lng: 35.18238, lat: 32.57660 },
             region: he.farmRegion.north,
             type: he.farmType.fieldCrops,
             farmer: {
@@ -108,7 +107,7 @@ function getInitialFarms() {
         {
             id: 'f_3',
             name: 'אבוקדו תענכים',
-            location: { latitude: 32.56590, longitude: 35.28542 },
+            location: { lng: 35.26893, lat: 32.55460 },
             region: he.farmRegion.north,
             type: he.farmType.fruitOrchard,
             farmer: {
@@ -121,7 +120,7 @@ function getInitialFarms() {
         {
             id: 'f_4',
             name: 'אורוות השרון',
-            location: { latitude: 32.35561, longitude: 34.92080 },
+            location: { lng: 34.91043, lat: 32.37877 },
             region: he.farmRegion.center,
             type: he.farmType.horseStable,
             farmer: {

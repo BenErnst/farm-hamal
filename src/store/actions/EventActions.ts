@@ -27,3 +27,16 @@ export function loadEvents() {
 //         }
 //     }
 // }
+
+export function updateEvent(eventToUpdate: Event) {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const updatedEvent = await EventService.Update(eventToUpdate);
+            const action = { type: 'UPDATE_EVENT', updatedEvent };
+            dispatch(action);
+        } catch (err) {
+            console.error('Error in updateEvent Action:', err);
+            throw err;
+        }
+    }
+}
