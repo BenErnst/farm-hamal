@@ -2,19 +2,17 @@ import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { confirmDialog } from 'primereact/confirmdialog';
 import { DataTable } from 'primereact/datatable';
-import { Tag, type TagProps } from 'primereact/tag';
+import { SelectButton } from 'primereact/selectbutton';
+import { Tag } from 'primereact/tag';
 import { useEffect, useState, type MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from "../hooks/useStoreTypes";
+import { MapService } from '../services/MapService';
+import { ToastService } from '../services/ToastService';
 import { UtilService } from '../services/UtilService';
 import { removeEvent, updateEvent } from '../store/actions/EventActions';
+import { selectEnrichedEvents, selectFilteredEvents } from '../store/selectors/eventSelectors';
 import type { EnrichedEvent, Event } from '../types/Event';
 import { FilterBy } from './FilterBy';
-import { selectEnrichedEvents, selectFilteredEvents } from '../store/selectors/eventSelectors';
-import { MapService } from '../services/MapService';
-import { Dropdown } from 'primereact/dropdown';
-import { SelectButton } from 'primereact/selectbutton';
-import { Toast } from 'primereact/toast';
-import { ToastService } from '../services/ToastService';
 
 
 export const EventTable = () => {

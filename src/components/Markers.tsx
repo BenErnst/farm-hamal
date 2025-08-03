@@ -1,11 +1,10 @@
 import { AdvancedMarker, Pin, useMap } from '@vis.gl/react-google-maps';
 import { useCallback, useEffect } from "react";
 import { useAppDispatch } from "../hooks/useStoreTypes";
+import { MapService } from '../services/MapService';
 import { updateEvent } from "../store/actions/EventActions";
 import type { Event } from "../types/Event";
 import type { Farm } from "../types/Farm";
-import { MapService } from '../services/MapService';
-import { Tooltip } from 'primereact/tooltip';
 
 
 interface Props {
