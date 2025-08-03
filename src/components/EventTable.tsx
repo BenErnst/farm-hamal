@@ -3,21 +3,45 @@ import { Column } from 'primereact/column';
 import { confirmDialog } from 'primereact/confirmdialog';
 import { DataTable } from 'primereact/datatable';
 import { Tag, type TagProps } from 'primereact/tag';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from "../hooks/useStoreTypes";
 import { UtilService } from '../services/UtilService';
-import { removeEvent } from '../store/actions/EventActions';
-import type { Event } from '../types/Event';
+import { removeEvent, updateEvent } from '../store/actions/EventActions';
+import type { EnrichedEvent, Event } from '../types/Event';
 import { FilterBy } from './FilterBy';
 import { selectEnrichedEvents, selectFilteredEvents } from '../store/selectors/eventSelectors';
+import { MapService } from '../services/MapService';
+import { Dropdown } from 'primereact/dropdown';
+import { SelectButton } from 'primereact/selectbutton';
 
 
 export const EventTable = () => {
     const dispatch = useAppDispatch();
     const eventsToShow = useAppSelector(selectFilteredEvents);
     const allEnrichedEvents = useAppSelector(selectEnrichedEvents);
-    const [selectedEvent, setSelectedEvent] = useState<any>(null);
-    const { he, statusSeverityMap } = UtilService;
+    const [selectedEvent, setSelectedEvent] = useState<EnrichedEvent | null>(null);
+    const { he } = UtilService;
+    const statusOptions = [
+        {
+            label: <Tag value={he.eventStatus.pending} severity="danger" />,
+            value: 'pending'
+        },
+        {
+            label: <Tag value={he.eventStatus.inProgress} severity="warning" />,
+            value: 'inProgress'
+        },
+        {
+            label: <Tag value={he.eventStatus.completed} severity="success" />,
+            value: 'completed'
+        }
+    ];
+
+
+    useEffect(() => {
+        if (selectedEvent) {
+            MapService.zoomTo(selectedEvent.location);
+        }
+    }, [selectedEvent])
 
 
     const tableHeader = () => {
@@ -75,24 +99,39 @@ export const EventTable = () => {
 
     const openRemoveDialog = () => {
         confirmDialog({
-            message: `האם למחוק את האירוע "${selectedEvent.type}" ב-${selectedEvent.farmName}?`,
+            message: `האם למחוק את האירוע "${selectedEvent?.type}" ב-${selectedEvent?.farmName}?`,
             header: 'מחיקת אירוע',
             icon: 'pi pi-exclamation-triangle',
             acceptLabel: 'מחק',
             rejectLabel: 'בטל',
             accept: () => {
-                dispatch(removeEvent(selectedEvent.id));
+                dispatch(removeEvent(selectedEvent?.id));
                 setSelectedEvent(null);
             }
         });
     }
 
 
-    const statusBodyTemplate = (event: Event) => {
-        const severity = statusSeverityMap[event.status] as TagProps['severity'];
-        const hebrewStatus = he.eventStatus[event.status];
-        return <Tag value={hebrewStatus} severity={severity} />;
-    }
+    const statusBodyTemplate = (event: EnrichedEvent) => {
+        return (
+            <SelectButton
+                value={event.status}
+                options={statusOptions}
+                onChange={(e) => handleStatusChange(event, e.value)}
+            // size="small"
+            />
+        );
+    };
+
+
+    const handleStatusChange = (event: Event, newStatus: Event['status']) => {
+        const eventToUpdate = {
+            ...event,
+            status: newStatus,
+            completedAt: newStatus === 'completed' ? Date.now() : null
+        };
+        dispatch(updateEvent(eventToUpdate));
+    };
 
 
     const dateBodyTemplate = (field: 'createdAt' | 'completedAt') => {

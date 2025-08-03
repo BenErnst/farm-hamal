@@ -1,3 +1,12 @@
+const makeId = (length = 7) => {
+    let id = "";
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < length; i++) {
+        id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+}
+
 
 const he = {
     farmType: {
@@ -12,7 +21,7 @@ const he = {
         fire: 'שריפה',
         theft: 'גניבה',
         fenceCut: 'חיתוך גדר',
-        protectionThreat: 'איום בפרוטקשן',
+        protectionThreat: 'פרוטקשן',
         gunfire: 'ירי',
         herdInvasion: 'פלישת עדר',
     },
@@ -24,26 +33,15 @@ const he = {
 };
 
 
-const statusSeverityMap = {
-    pending: 'danger',
-    inProgress: 'warning',
-    completed: 'success'
-}
+// const statusSeverityMap = {
+//     pending: 'danger',
+//     inProgress: 'warning',
+//     completed: 'success'
+// }
 
 
 export const UtilService = {
-    // makeId,
+    makeId,
     he,
-    statusSeverityMap
+    // statusSeverityMap,
 }
-
-
-// function makeId(length = 7) {
-//     let id = "";
-//     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//     for (var i = 0; i < length; i++) {
-//         id += chars.charAt(Math.floor(Math.random() * chars.length));
-//     }
-//     return id;
-// }
-

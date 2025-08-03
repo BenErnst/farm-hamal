@@ -13,7 +13,7 @@ type EventType =
     | 'שריפה' // fire
     | 'גניבה' // theft
     | 'חיתוך גדר' // fenceCut
-    | 'איום בפרוטקשן' // protectionThreat
+    | 'פרוטקשן' // protectionThreat
     | 'ירי' // gunfire
     | 'פלישת עדר'; // herdInvasion
 

@@ -90,9 +90,10 @@ function getInitialFarms() {
             farmer: {
                 name: 'משה פילמן',
                 phone: '052-*******',
-                picURL: ''
+                picURL: 'https://i.pravatar.cc/150?img=62'
             },
-            eventIds: ['e_1', 'e_3']
+            eventIds: ['e_1', 'e_3'],
+            emoji: '🐮'
         },
         {
             id: 'f_2',
@@ -102,9 +103,10 @@ function getInitialFarms() {
             farmer: {
                 name: 'איציק לוין',
                 phone: '054-*******',
-                picURL: ''
+                picURL: 'https://i.pravatar.cc/150?img=65'
             },
-            eventIds: ['e_2']
+            eventIds: ['e_2'],
+            emoji: '🍅'
         },
         {
             id: 'f_3',
@@ -114,21 +116,49 @@ function getInitialFarms() {
             farmer: {
                 name: 'ירון שלמה',
                 phone: '050-*******',
-                picURL: ''
+                picURL: 'https://i.pravatar.cc/150?img=17'
             },
-            eventIds: []
+            eventIds: [],
+            emoji: '🥑'
         },
         {
             id: 'f_4',
-            name: 'אורוות השרון',
-            location: { lng: 34.91043, lat: 32.37877 },
+            name: 'אורוות יזרעאל',
+            location: { lng: 35.23117, lat: 32.66213 },
             type: he.farmType.horseStable,
             farmer: {
                 name: 'ענת גרשוני',
                 phone: '052-*******',
-                picURL: ''
+                picURL: 'https://i.pravatar.cc/150?img=47'
             },
-            eventIds: []
+            eventIds: [],
+            emoji: '🐴'
         },
+        {
+            id: 'f_5',
+            name: 'לול רמת ישי',
+            location: { lng: 35.17770, lat: 32.70178 },
+            type: he.farmType.chickenCoop,
+            farmer: {
+                name: 'שמעון כהן',
+                phone: '052-*******',
+                picURL: 'https://i.pravatar.cc/150?img=33'
+            },
+            eventIds: [],
+            emoji: '🐔'
+        },
+        {
+            id: 'f_6',
+            name: 'עיזים נהלל',
+            location: { lng: 35.19123, lat: 32.68921 },
+            type: he.farmType.goatPen,
+            farmer: {
+                name: 'יפעת אלון',
+                phone: '054-*******',
+                picURL: 'https://i.pravatar.cc/150?img=29'
+            },
+            eventIds: [],
+            emoji: '🐐'
+        }
     ] as Farm[]
 }

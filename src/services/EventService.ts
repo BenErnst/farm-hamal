@@ -12,7 +12,7 @@ export const EventService = {
 }
 
 
-const { he } = UtilService;
+const { he, makeId } = UtilService;
 
 
 async function QueryAll(): Promise<Event[]> {
@@ -33,7 +33,7 @@ async function Add(eventToAdd: Omit<Event, 'id'>): Promise<Event> {
     return await new Promise((resolve) => {
         const newEvent: Event = {
             ...eventToAdd,
-            id: `e_${Math.floor(Math.random() * 10000)}`
+            id: `e_${makeId()} `
         };
         const events = getParsedEvents();
         events.push(newEvent);
@@ -45,7 +45,7 @@ async function Add(eventToAdd: Omit<Event, 'id'>): Promise<Event> {
 
 // async function Add(productToAdd: Product): Promise<Product> {
 //     const res = new Promise((resolve) => {
-//         productToAdd._id = `p_${Math.floor(Math.random() * 10000)}`
+//         productToAdd._id = `p_${ Math.floor(Math.random() * 10000) } `
 //         const products = getParsedProducts();
 //         products.push(productToAdd);
 //         StorageService.save('products', products);
@@ -117,7 +117,7 @@ function getInitialEvents() {
         {
             id: 'e_3',
             location: { lng: 35.40483182411195, lat: 32.67987629098312 },
-            type: he.eventType.gunfire,
+            type: he.eventType.herdInvasion,
             status: 'completed',
             createdAt: 1751795442000,
             completedAt: 1751802642000

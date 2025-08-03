@@ -8,6 +8,7 @@ export interface Farm {
     type: FarmType
     farmer: Farmer
     eventIds: Event['id'][]
+    emoji: string
 }
 
 type FarmType =
