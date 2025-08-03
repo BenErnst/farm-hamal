@@ -1,7 +1,7 @@
 import type { Location } from "./Location"
 
 export interface Event {
-    id: string
+    id?: string
     location: Location
     type: EventType
     status: EventStatus
@@ -10,15 +10,18 @@ export interface Event {
 }
 
 type EventType =
-    | 'fire' // שריפה
-    | 'theft' // גניבה
-    | 'fenceCut' // חיתוך גדר
-    | 'protectionThreat' // איום בפרוטקשן
-    | 'gunfire' // ירי
-    | 'herdInvasion' // פלישת עדר
-
+    | 'שריפה' // fire
+    | 'גניבה' // theft
+    | 'חיתוך גדר' // fenceCut
+    | 'איום בפרוטקשן' // protectionThreat
+    | 'ירי' // gunfire
+    | 'פלישת עדר'; // herdInvasion
 
 type EventStatus =
     | 'pending' // טרם טופל
     | 'inProgress' // בטיפול
     | 'completed' // טופל
+
+export interface EnrichedEvent extends Event {
+    farmName: string;
+}

@@ -1,20 +1,21 @@
-import type { Event } from "../types/event";
+import type { Event } from "../types/Event";
 import { StorageService } from "./StorageService";
 import { UtilService } from "./UtilService";
 
 
 export const EventService = {
-    getAll,
-    // Add,
+    QueryAll,
+    Add,
     Update,
-    // Remove
+    Remove,
+    filterByIds
 }
 
 
 const { he } = UtilService;
 
 
-async function getAll(): Promise<Event[]> {
+async function QueryAll(): Promise<Event[]> {
     return await new Promise((resolve) => {
         let eventsJson = StorageService.load('events') as string | null;
         if (!eventsJson) {
@@ -24,6 +25,20 @@ async function getAll(): Promise<Event[]> {
         }
         const allEvents = JSON.parse(eventsJson) as Event[];
         resolve(allEvents);
+    });
+}
+
+
+async function Add(eventToAdd: Omit<Event, 'id'>): Promise<Event> {
+    return await new Promise((resolve) => {
+        const newEvent: Event = {
+            ...eventToAdd,
+            id: `e_${Math.floor(Math.random() * 10000)}`
+        };
+        const events = getParsedEvents();
+        events.push(newEvent);
+        StorageService.save('events', events);
+        resolve(newEvent);
     });
 }
 
@@ -54,17 +69,24 @@ async function Update(eventToUpdate: Event): Promise<Event> {
 }
 
 
-// async function Remove(productToRemove: Product): Promise<Product['_id']> {
-//     const res = new Promise((resolve) => {
-//         const products = getParsedProducts();
-//         const productToRemoveIdx = products.findIndex(product => product._id === productToRemove._id);
-//         products.splice(productToRemoveIdx, 1);
-//         StorageService.save('products', products);
-//         resolve(productToRemove._id);
-//     });
-//     const removedProductId = await res as Product['_id'];
-//     return removedProductId;
-// }
+async function Remove(eventToRemoveId: Event['id']): Promise<Event['id']> {
+    return await new Promise((resolve) => {
+        const events = getParsedEvents();
+        const eventToRemoveIdx = events.findIndex(event => event.id === eventToRemoveId);
+        events.splice(eventToRemoveIdx, 1);
+        StorageService.save('events', events);
+        resolve(eventToRemoveId);
+    });
+}
+
+
+async function filterByIds(eventIds: Event['id'][]): Promise<Event[]> {
+    return await new Promise((resolve) => {
+        const events = getParsedEvents();
+        const filteredEvents = events.filter(event => eventIds.includes(event.id));
+        resolve(filteredEvents);
+    });
+}
 
 
 function getParsedEvents() {
@@ -80,7 +102,7 @@ function getInitialEvents() {
             id: 'e_1',
             location: { lng: 35.40185993652345, lat: 32.67866168499153 },
             type: he.eventType.theft,
-            status: he.eventStatus.pending,
+            status: 'pending',
             createdAt: 1751363442000,
             completedAt: null
         },
@@ -88,7 +110,7 @@ function getInitialEvents() {
             id: 'e_2',
             location: { lng: 35.18210124183654, lat: 32.57578817544346 },
             type: he.eventType.fenceCut,
-            status: he.eventStatus.inProgress,
+            status: 'inProgress',
             createdAt: 1751709042000,
             completedAt: null
         },
@@ -96,7 +118,7 @@ function getInitialEvents() {
             id: 'e_3',
             location: { lng: 35.40483182411195, lat: 32.67987629098312 },
             type: he.eventType.gunfire,
-            status: he.eventStatus.completed,
+            status: 'completed',
             createdAt: 1751795442000,
             completedAt: 1751802642000
         },

@@ -1,12 +1,12 @@
-import type { Farm } from "../types/farm";
+import type { Farm } from "../types/Farm";
 import { StorageService } from "./StorageService";
 import { UtilService } from "./UtilService";
 
 
 export const FarmService = {
-    getAll,
+    QueryAll,
     // Add,
-    // Edit,
+    Update,
     // Remove
 }
 
@@ -14,7 +14,7 @@ export const FarmService = {
 const { he } = UtilService;
 
 
-async function getAll(): Promise<Farm[]> {
+async function QueryAll(): Promise<Farm[]> {
     return await new Promise((resolve) => {
         let farmsJson = StorageService.load('farms') as string | null;
         if (!farmsJson) {
@@ -25,6 +25,24 @@ async function getAll(): Promise<Farm[]> {
         const allFarms = JSON.parse(farmsJson) as Farm[];
         resolve(allFarms);
     });
+}
+
+
+async function Update(farmToUpdate: Farm): Promise<Farm> {
+    return await new Promise((resolve) => {
+        const farms = getParsedFarms();
+        const farmToUpdateIdx = farms.findIndex(farm => farm.id === farmToUpdate.id);
+        farms.splice(farmToUpdateIdx, 1, farmToUpdate);
+        StorageService.save('farms', farms);
+        const updatedFarm = farms.find(farm => farm.id === farmToUpdate.id) as Farm;
+        resolve(updatedFarm);
+    });
+}
+
+
+function getParsedFarms(): Farm[] {
+    const farmsJson = StorageService.load('farms') as string;
+    return JSON.parse(farmsJson) as Farm[];
 }
 
 
@@ -39,20 +57,6 @@ async function getAll(): Promise<Farm[]> {
 //     });
 //     const addedProduct = await res as Product;
 //     return addedProduct;
-// }
-
-
-// async function Edit(productToEdit: Product): Promise<Product> {
-//     const res = new Promise((resolve) => {
-//         const products = getParsedProducts();
-//         const productToEditIdx = products.findIndex(product => product._id === productToEdit._id);
-//         products.splice(productToEditIdx, 1, productToEdit);
-//         StorageService.save('products', products);
-//         const editedProduct = products.find(product => product._id === productToEdit._id);
-//         resolve(editedProduct);
-//     });
-//     const editedProduct = await res as Product;
-//     return editedProduct;
 // }
 
 
@@ -82,53 +86,49 @@ function getInitialFarms() {
             id: 'f_1',
             name: 'בוקרי התבור',
             location: { lng: 35.40264, lat: 32.67867 },
-            region: he.farmRegion.north,
             type: he.farmType.cattleFarm,
             farmer: {
                 name: 'משה פילמן',
                 phone: '052-*******',
                 picURL: ''
             },
-            eventsIds: ['e_1', 'e_3']
+            eventIds: ['e_1', 'e_3']
         },
         {
             id: 'f_2',
             name: 'עגבניות מגידו',
             location: { lng: 35.18238, lat: 32.57660 },
-            region: he.farmRegion.north,
             type: he.farmType.fieldCrops,
             farmer: {
                 name: 'איציק לוין',
                 phone: '054-*******',
                 picURL: ''
             },
-            eventsIds: ['e_2']
+            eventIds: ['e_2']
         },
         {
             id: 'f_3',
             name: 'אבוקדו תענכים',
             location: { lng: 35.26893, lat: 32.55460 },
-            region: he.farmRegion.north,
             type: he.farmType.fruitOrchard,
             farmer: {
                 name: 'ירון שלמה',
                 phone: '050-*******',
                 picURL: ''
             },
-            eventsIds: []
+            eventIds: []
         },
         {
             id: 'f_4',
             name: 'אורוות השרון',
             location: { lng: 34.91043, lat: 32.37877 },
-            region: he.farmRegion.center,
             type: he.farmType.horseStable,
             farmer: {
                 name: 'ענת גרשוני',
                 phone: '052-*******',
                 picURL: ''
             },
-            eventsIds: []
+            eventIds: []
         },
     ] as Farm[]
 }

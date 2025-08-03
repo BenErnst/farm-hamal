@@ -8,11 +8,6 @@ const he = {
         horseStable: 'אורוות סוסים',
         chickenCoop: 'לול',
     },
-    farmRegion: {
-        north: 'צפון',
-        center: 'מרכז',
-        south: 'דרום'
-    },
     eventType: {
         fire: 'שריפה',
         theft: 'גניבה',
@@ -28,10 +23,20 @@ const he = {
     }
 };
 
+
+const statusSeverityMap = {
+    pending: 'danger',
+    inProgress: 'warning',
+    completed: 'success'
+}
+
+
 export const UtilService = {
     // makeId,
     he,
+    statusSeverityMap
 }
+
 
 // function makeId(length = 7) {
 //     let id = "";

@@ -1,12 +1,13 @@
 import { EventService } from "../../services/EventService";
-import type { Event } from "../../types/event";
-import type { AppDispatch } from "../../types/Store";
+import type { Event } from "../../types/Event";
+import type { AppDispatch, EventFilterBy } from "../../types/Store";
+import { updateFarmEventIds } from "./FarmActions";
 
 
 export function loadEvents() {
     return async (dispatch: AppDispatch) => {
         try {
-            const events: Event[] = await EventService.getAll();
+            const events: Event[] = await EventService.QueryAll();
             const action = { type: 'SET_EVENTS', events };
             dispatch(action);
         } catch (err) {
@@ -16,17 +17,22 @@ export function loadEvents() {
     }
 }
 
-// export function addEvent(eventToAdd: Event) {
-//     return async (dispatch: AppDispatch) => {
-//         try {
-//             const action = { type: 'ADD_EVENT', eventToAdd };
-//             dispatch(action);
-//         } catch (err) {
-//             console.error('Error in addEvent Action:', err);
-//             throw err;
-//         }
-//     }
-// }
+
+export function addEvent(eventToAdd: Event, farmId: string) {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const addedEvent = await EventService.Add(eventToAdd);
+            const action = { type: 'ADD_EVENT', addedEvent };
+            dispatch(action);
+            // Update the farm to include this event ID and persist to storage:
+            dispatch(updateFarmEventIds(farmId, addedEvent.id));
+        } catch (err) {
+            console.error('Error in addEvent Action:', err);
+            throw err;
+        }
+    }
+}
+
 
 export function updateEvent(eventToUpdate: Event) {
     return async (dispatch: AppDispatch) => {
@@ -40,3 +46,48 @@ export function updateEvent(eventToUpdate: Event) {
         }
     }
 }
+
+
+export function removeEvent(eventToRemoveId: Event['id']) {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const removedEventId = await EventService.Remove(eventToRemoveId);
+            const action = { type: 'REMOVE_EVENT', removedEventId };
+            dispatch(action);
+        } catch (err) {
+            console.error('Error in removeEvent Action:', err);
+            throw err;
+        }
+    }
+}
+
+
+export function setEventFilterBy(filterBy: Partial<EventFilterBy>) {
+    return (dispatch: AppDispatch) => {
+        const action = { type: 'SET_EVENT_FILTER_BY', filterBy };
+        dispatch(action);
+    }
+}
+
+
+export function clearEventFilterBy() {
+    return (dispatch: AppDispatch) => {
+        const action = { type: 'CLEAR_EVENT_FILTER_BY' };
+        dispatch(action);
+    }
+}
+
+
+
+// export function setEventIdsFilterBy(eventIds: Event['id'][]) {
+//     return async (dispatch: AppDispatch) => {
+//         try {
+//             // const filteredEvents: Event[] = await EventService.filterByIds(eventIds);
+//             const action = { type: 'SET_EVENT_IDS_FILTER_BY', eventIdsFilterBy: eventIds };
+//             dispatch(action);
+//         } catch (err) {
+//             console.error('Error in setEventIdsFilterBy Action:', err);
+//             throw err;
+//         }
+//     }
+// }
