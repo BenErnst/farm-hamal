@@ -18,36 +18,39 @@ export const FarmList = () => {
         const farmEvents = events.filter(event => farm.eventIds.includes(event.id));
         return (
             <div className='farm-item-template' onClick={() => MapService.zoomTo(farm.location)}>
-                <div title={farm.type}>
+                <header title={farm.type}>
                     <span>{farm.emoji}</span>
-                    <span>{farm.name}</span>
-                </div>
-                <div title={farm.farmer.phone}>
+                    <strong>{farm.name}</strong>
+                </header>
+                <aside title={farm.farmer.phone}>
                     <Avatar image={farm.farmer.picURL} shape="circle" />
                     <span>{farm.farmer.name}</span>
-                </div>
-                {farmEvents.length ? getEventsCount(farmEvents) : null}
+                </aside>
+                {getEventsCount(farmEvents)}
             </div>
         )
     }
 
 
     const getEventsCount = (farmEvents: Event[]) => {
-        const pendingCount = farmEvents.filter(event => event.status === 'pending').length;
-        const inProgressCount = farmEvents.filter(event => event.status === 'inProgress').length;
-        const completedCount = farmEvents.filter(event => event.status === 'completed').length;
+        const pendingCount = farmEvents.length ? farmEvents.filter(event => event.status === 'pending').length : 0;
+        const inProgressCount = farmEvents.length ? farmEvents.filter(event => event.status === 'inProgress').length : 0;
+        const completedCount = farmEvents.length ? farmEvents.filter(event => event.status === 'completed').length : 0;
         return (
-            <div>
+            <footer>
                 <Badge value={pendingCount} severity="danger" title={'אירועים שטרם טופלו'} />
                 <Badge value={inProgressCount} severity="warning" title={'אירועים בטיפול'} />
                 <Badge value={completedCount} severity="success" title={'אירועים שטופלו'} />
-            </div>
+            </footer>
         )
     }
 
 
     return (
         <div className="farm-list-container">
+            <div>
+                <span>{'חוות'}</span>
+            </div>
             <ListBox
                 options={farms}
                 value={selectedFarm}
@@ -55,7 +58,6 @@ export const FarmList = () => {
                 optionLabel="name"
                 itemTemplate={itemTemplate}
                 className="w-full md:w-14rem"
-                listStyle={{ maxHeight: '500px' }}
             />
         </div>
     )

@@ -159,6 +159,19 @@ function getInitialFarms() {
             },
             eventIds: [],
             emoji: '🐐'
+        },
+        {
+            id: 'f_7',
+            name: 'מנגו הגלבוע',
+            location: { lng: 35.35010, lat: 32.54023 },
+            type: he.farmType.fieldCrops,
+            farmer: {
+                name: 'עומר נחשון',
+                phone: '054-*******',
+                picURL: 'https://i.pravatar.cc/150?img=12'
+            },
+            eventIds: [],
+            emoji: '🥭'
         }
     ] as Farm[]
 }

@@ -6,8 +6,8 @@ export const Home = () => {
     return (
         <div className="home-container">
             <main>
-                <EventTable />
                 <FarmList />
+                <EventTable />
                 {/* <Dashboard /> */}
             </main>
             <FarmMap />

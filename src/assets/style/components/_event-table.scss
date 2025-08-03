@@ -1,0 +1,22 @@
+.event-table-container {
+    // width: 70%;
+    .p-column-title {
+        margin: auto;
+    }
+    th, td {
+        text-align: center;
+        font-size: 15px;
+        padding: 10px;
+    }
+    .p-selectbutton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    button {
+        width: 10px;
+        height: 30px;
+        border-radius: 0;
+        padding: 15px;
+    }
+}

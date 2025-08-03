@@ -3,7 +3,7 @@ import { Column } from 'primereact/column';
 import { confirmDialog } from 'primereact/confirmdialog';
 import { DataTable } from 'primereact/datatable';
 import { Tag, type TagProps } from 'primereact/tag';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from "../hooks/useStoreTypes";
 import { UtilService } from '../services/UtilService';
 import { removeEvent, updateEvent } from '../store/actions/EventActions';
@@ -13,6 +13,8 @@ import { selectEnrichedEvents, selectFilteredEvents } from '../store/selectors/e
 import { MapService } from '../services/MapService';
 import { Dropdown } from 'primereact/dropdown';
 import { SelectButton } from 'primereact/selectbutton';
+import { Toast } from 'primereact/toast';
+import { ToastService } from '../services/ToastService';
 
 
 export const EventTable = () => {
@@ -47,20 +49,7 @@ export const EventTable = () => {
     const tableHeader = () => {
         return (
             <div className='table-header-container'>
-                <section>
-                    <span>{`אירועים`}</span>
-                </section>
-                <section>
-                    <Button
-                        type="button"
-                        icon="pi pi-trash"
-                        rounded
-                        severity='danger'
-                        disabled={!selectedEvent}
-                        tooltip="מחק אירוע"
-                        onClick={openRemoveDialog}
-                    />
-                </section>
+                <span>{`אירועים`}</span>
             </div>
         )
     }
@@ -97,16 +86,23 @@ export const EventTable = () => {
     }
 
 
-    const openRemoveDialog = () => {
+    const openRemoveDialog = (ev: MouseEvent<HTMLButtonElement>, event: EnrichedEvent) => {
+        ev.stopPropagation();
         confirmDialog({
-            message: `האם למחוק את האירוע "${selectedEvent?.type}" ב-${selectedEvent?.farmName}?`,
+            message: `האם למחוק את האירוע "${event.type}" ב-${event.farmName}?`,
             header: 'מחיקת אירוע',
             icon: 'pi pi-exclamation-triangle',
             acceptLabel: 'מחק',
             rejectLabel: 'בטל',
-            accept: () => {
-                dispatch(removeEvent(selectedEvent?.id));
-                setSelectedEvent(null);
+            accept: async () => {
+                try {
+                    await dispatch(removeEvent(event.id));
+                    setSelectedEvent(null);
+                    ToastService.showSuccessMsg('האירוע נמחק בהצלחה.');
+                } catch (err) {
+                    ToastService.showErrorMsg('אירעה שגיאה במחיקת האירוע.');
+                    throw err;
+                }
             }
         });
     }
@@ -118,7 +114,6 @@ export const EventTable = () => {
                 value={event.status}
                 options={statusOptions}
                 onChange={(e) => handleStatusChange(event, e.value)}
-            // size="small"
             />
         );
     };
@@ -170,17 +165,24 @@ export const EventTable = () => {
                 filterDisplay="row"
                 selectionMode="single"
                 selection={selectedEvent}
-                onSelectionChange={(e) => setSelectedEvent(e.value)}
+                onSelectionChange={(e) => setSelectedEvent(e.value as EnrichedEvent | null)}
                 tableStyle={{ minWidth: '30rem' }}
                 emptyMessage="אין אירועים להצגה"
+                size='small'
             >
                 <Column field="type" header="סוג האירוע" sortable filter filterElement={getFilterElement} />
                 <Column field="farmName" header="חווה" sortable filter filterElement={getFilterElement} />
                 <Column field="status" header="סטטוס" body={statusBodyTemplate} sortable filter filterElement={getFilterElement} />
-                <Column field="createdAt" header="נוצר ב-" body={dateBodyTemplate('createdAt')} sortable />
-                <Column field="completedAt" header="הסתיים ב-" body={dateBodyTemplate('completedAt')} sortable />
-                {/* <Column field="location.lng" header="lng" />
-                <Column field="location.lat" header="lat" /> */}
+                <Column field="createdAt" header="נוצר" body={dateBodyTemplate('createdAt')} sortable />
+                <Column field="completedAt" header="טופל" body={dateBodyTemplate('completedAt')} sortable />
+                <Column body={(event) => <Button
+                    type="button"
+                    icon="pi pi-trash"
+                    rounded
+                    severity='secondary'
+                    size='small'
+                    onClick={(nativeEvent) => openRemoveDialog(nativeEvent, event)}
+                />} />
             </DataTable>
         </div>
     )
