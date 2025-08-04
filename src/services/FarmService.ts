@@ -54,7 +54,7 @@ function getInitialFarms() {
             farmer: {
                 name: 'משה פילמן',
                 phone: '052-*******',
-                picURL: 'https://i.pravatar.cc/150?img=62'
+                picURL: 'https://i.pravatar.cc/150?img=70'
             },
             eventIds: ['e_1', 'e_3'],
             emoji: '🐮'
