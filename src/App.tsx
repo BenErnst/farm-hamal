@@ -1,15 +1,15 @@
-import { useEffect, useRef } from "react"
-import "primereact/resources/themes/lara-dark-blue/theme.css";
 import "primeicons/primeicons.css";
-import { AppHeader } from './components/AppHeader'
+import { ConfirmDialog } from "primereact/confirmdialog";
+import "primereact/resources/themes/lara-dark-blue/theme.css";
+import { Toast } from "primereact/toast";
+import { useEffect, useRef } from "react";
 import './assets/style/global.scss';
+import { AppHeader } from './components/AppHeader';
 import { Home } from "./components/Home";
 import { useAppDispatch } from "./hooks/useStoreTypes";
-import { loadFarms } from "./store/actions/FarmActions";
-import { loadEvents } from "./store/actions/EventActions";
-import { ConfirmDialog } from "primereact/confirmdialog";
-import { Toast } from "primereact/toast";
 import { ToastService } from "./services/ToastService";
+import { loadEvents } from "./store/actions/EventActions";
+import { loadFarms } from "./store/actions/FarmActions";
 
 
 function App() {
