@@ -6,7 +6,7 @@ export interface Event {
     type: EventType
     status: EventStatus
     createdAt: number | null
-    completedAt: number | null
+    updatedAt: number | null
 }
 
 type EventType =
@@ -14,7 +14,6 @@ type EventType =
     | 'גניבה' // theft
     | 'חיתוך גדר' // fenceCut
     | 'פרוטקשן' // protectionThreat
-    | 'ירי' // gunfire
     | 'פלישת עדר'; // herdInvasion
 
 type EventStatus =

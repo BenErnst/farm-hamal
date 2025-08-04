@@ -36,12 +36,6 @@ export function FarmReducer(state = INITIAL_STATE, action: any): GlobalFarmState
                 )
             };
 
-        // case 'ADD_FARM':
-        //     return {
-        //         ...state,
-        //         farms: [...state.farms, action.farmToAdd]
-        //     };
-
         default:
             return state;
     }

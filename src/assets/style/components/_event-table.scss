@@ -1,17 +1,55 @@
 .event-table-container {
-    // width: 70%;
+    width: 84%;
+    height: 100%; 
+    background: #1f2937;
+    .p-datatable {
+        border: 1px solid #575757;
+    }
+    .p-datatable-wrapper {
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: #7d7d7d #1f2937;
+    }
     .p-column-title {
         margin: auto;
+    }
+    td {
+        width: fit-content;
     }
     th, td {
         text-align: center;
         font-size: 15px;
         padding: 10px;
     }
+    th, tr {
+        &:hover {
+            background-color: #1f2937;
+        }
+    }
     .p-selectbutton {
         display: flex;
         align-items: center;
         justify-content: center;
+        border: 2px solid #5b6472;
+        border-radius: 5px;
+        width: 85%;
+        margin: auto;
+        .p-button {
+            border: none;
+            border-radius: 0;
+            transition: none;
+            width: 101px;
+            opacity: 0.5;
+            &.p-highlight {
+                opacity: 1;
+                border: none;
+                background-color: #5b6472;
+            }
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
     }
     button {
         width: 10px;

@@ -48,7 +48,7 @@ export const FarmList = () => {
 
     return (
         <div className="farm-list-container">
-            <div>
+            <div className='farm-list-header'>
                 <span>{'חוות'}</span>
             </div>
             <ListBox

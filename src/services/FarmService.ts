@@ -118,7 +118,7 @@ function getInitialFarms() {
                 phone: '050-*******',
                 picURL: 'https://i.pravatar.cc/150?img=17'
             },
-            eventIds: [],
+            eventIds: ['e_4'],
             emoji: '🥑'
         },
         {
@@ -136,8 +136,8 @@ function getInitialFarms() {
         },
         {
             id: 'f_5',
-            name: 'לול רמת ישי',
-            location: { lng: 35.17770, lat: 32.70178 },
+            name: 'לול הכרמל',
+            location: { lng: 35.07848, lat: 32.68722 },
             type: he.farmType.chickenCoop,
             farmer: {
                 name: 'שמעון כהן',
@@ -157,7 +157,7 @@ function getInitialFarms() {
                 phone: '054-*******',
                 picURL: 'https://i.pravatar.cc/150?img=29'
             },
-            eventIds: [],
+            eventIds: ['e_5'],
             emoji: '🐐'
         },
         {
@@ -170,7 +170,7 @@ function getInitialFarms() {
                 phone: '054-*******',
                 picURL: 'https://i.pravatar.cc/150?img=12'
             },
-            eventIds: [],
+            eventIds: ['e_6'],
             emoji: '🥭'
         }
     ] as Farm[]

@@ -22,7 +22,6 @@ const he = {
         theft: 'גניבה',
         fenceCut: 'חיתוך גדר',
         protectionThreat: 'פרוטקשן',
-        gunfire: 'ירי',
         herdInvasion: 'פלישת עדר',
     },
     eventStatus: {

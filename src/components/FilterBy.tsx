@@ -39,7 +39,6 @@ export const FilterBy = (props: Props) => {
                 placeholder={'סנן לפי'}
                 className="p-column-filter"
                 style={{ minWidth: '5rem' }}
-                showClear
             />
         </div>
     )

@@ -19,7 +19,7 @@ interface Props {
 
 // Zod schema for form validation
 const eventFormSchema = z.object({
-    type: z.enum(['שריפה', 'גניבה', 'חיתוך גדר', 'פרוטקשן', 'ירי', 'פלישת עדר']),
+    type: z.enum(['שריפה', 'גניבה', 'חיתוך גדר', 'פרוטקשן', 'פלישת עדר']),
     farmId: z.string().min(1, 'יש לבחור חווה')
 });
 export type EventFormData = z.infer<typeof eventFormSchema>;
@@ -59,7 +59,7 @@ export const EventAdd = (props: Props) => {
             type: eventFormData.type,
             status: 'pending',
             createdAt: Date.now(),
-            completedAt: null
+            updatedAt: Date.now()
         } as Event;
         try {
             await dispatch(addEvent(eventToAdd, eventFormData.farmId));
@@ -85,7 +85,6 @@ export const EventAdd = (props: Props) => {
                     { label: he.eventType.theft, value: 'גניבה' },
                     { label: he.eventType.fenceCut, value: 'חיתוך גדר' },
                     { label: he.eventType.protectionThreat, value: 'פרוטקשן' },
-                    { label: he.eventType.gunfire, value: 'ירי' },
                     { label: he.eventType.herdInvasion, value: 'פלישת עדר' }
                 ]}
             />

@@ -16,6 +16,7 @@ body {
     background-color: variables.$bodyBg;
     color: variables.$secondaryTxt;
     font-family: Arial, sans-serif, Helvetica;
+    overflow: hidden;
 }
 
 button {

@@ -4,11 +4,11 @@ import type { GlobalEventState } from "../../types/Store";
 
 const INITIAL_STATE: GlobalEventState = {
     events: [],
-    filterBy: {
-        type: [],
-        status: [],
-        farmName: []
-    }
+    // filterBy: {
+    //     type: [],
+    //     status: [],
+    //     farmName: []
+    // }
 };
 
 

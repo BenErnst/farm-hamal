@@ -104,7 +104,7 @@ function getInitialEvents() {
             type: he.eventType.theft,
             status: 'pending',
             createdAt: 1751363442000,
-            completedAt: null
+            updatedAt: 1751363442000
         },
         {
             id: 'e_2',
@@ -112,7 +112,7 @@ function getInitialEvents() {
             type: he.eventType.fenceCut,
             status: 'inProgress',
             createdAt: 1751709042000,
-            completedAt: null
+            updatedAt: 1751709042000
         },
         {
             id: 'e_3',
@@ -120,7 +120,71 @@ function getInitialEvents() {
             type: he.eventType.herdInvasion,
             status: 'completed',
             createdAt: 1751795442000,
-            completedAt: 1751802642000
+            updatedAt: 1751795442000
+        },
+        {
+            id: 'e_4',
+            location: { lng: 35.26927152998542, lat: 32.553101777923814 },
+            type: he.eventType.theft,
+            status: 'pending',
+            createdAt: 1751881842000,
+            updatedAt: 1751881842000
+        },
+        {
+            id: 'e_5',
+            location: { lng: 35.189602327935525, lat: 32.68968733364655 },
+            type: he.eventType.fenceCut,
+            status: 'inProgress',
+            createdAt: 1751968242000,
+            updatedAt: 1751968242000
+        },
+        {
+            id: 'e_6',
+            location: { lng: 35.3535502482119, lat: 32.535911641598894 },
+            type: he.eventType.fire,
+            status: 'pending',
+            createdAt: 1752054642000,
+            updatedAt: 1752054642000
+        },
+        {
+            id: 'e_7',
+            location: { lng: 35.49727799780463, lat: 32.608221605736716 },
+            type: he.eventType.herdInvasion,
+            status: 'pending',
+            createdAt: 1752141042000,
+            updatedAt: 1752141042000
+        },
+        {
+            id: 'e_8',
+            location: { lng: 35.485832014672575, lat: 32.74667452073306 },
+            type: he.eventType.herdInvasion,
+            status: 'inProgress',
+            createdAt: 1752227442000,
+            updatedAt: 1752227442000
+        },
+        {
+            id: 'e_9',
+            location: { lng: 35.43310225016505, lat: 32.50963967482728 },
+            type: he.eventType.theft,
+            status: 'inProgress',
+            createdAt: 1752313842000,
+            updatedAt: 1752313842000
+        },
+        {
+            id: 'e_10',
+            location: { lng: 35.1058087765503, lat: 32.5894634608399 },
+            type: he.eventType.fenceCut,
+            status: 'pending',
+            createdAt: 1752400242000,
+            updatedAt: 1752400242000
+        },
+        {
+            id: 'e_11',
+            location: { lng: 35.282840074462875, lat: 32.739701474296794 },
+            type: he.eventType.fire,
+            status: 'completed',
+            createdAt: 1752486642000,
+            updatedAt: 1752486642000
         },
     ] as Event[]
 }

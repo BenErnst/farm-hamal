@@ -76,18 +76,3 @@ export function clearEventFilterBy() {
         dispatch(action);
     }
 }
-
-
-
-// export function setEventIdsFilterBy(eventIds: Event['id'][]) {
-//     return async (dispatch: AppDispatch) => {
-//         try {
-//             // const filteredEvents: Event[] = await EventService.filterByIds(eventIds);
-//             const action = { type: 'SET_EVENT_IDS_FILTER_BY', eventIdsFilterBy: eventIds };
-//             dispatch(action);
-//         } catch (err) {
-//             console.error('Error in setEventIdsFilterBy Action:', err);
-//             throw err;
-//         }
-//     }
-// }

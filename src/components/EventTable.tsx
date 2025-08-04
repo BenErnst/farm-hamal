@@ -121,26 +121,25 @@ export const EventTable = () => {
         const eventToUpdate = {
             ...event,
             status: newStatus,
-            completedAt: newStatus === 'completed' ? Date.now() : null
+            updatedAt: Date.now()
         };
         dispatch(updateEvent(eventToUpdate));
     };
 
 
-    const dateBodyTemplate = (field: 'createdAt' | 'completedAt') => {
+    const dateBodyTemplate = (field: 'createdAt' | 'updatedAt') => {
         return (event: Event) => {
             const timestamp = event[field];
-            if (!timestamp) {
-                return '-'
+            if (timestamp) {
+                const date = new Date(timestamp);
+                return date.toLocaleDateString('he-IL', {
+                    year: '2-digit',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
             };
-            const date = new Date(timestamp);
-            return date.toLocaleDateString('he-IL', {
-                year: '2-digit',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
         };
     }
 
@@ -160,23 +159,26 @@ export const EventTable = () => {
                 header={tableHeader()}
                 footer={tableFooter()}
                 showGridlines
-                filterDisplay="row"
+                // filterDisplay="row"
                 selectionMode="single"
                 selection={selectedEvent}
                 onSelectionChange={(e) => setSelectedEvent(e.value as EnrichedEvent | null)}
-                tableStyle={{ minWidth: '30rem' }}
+                // tableStyle={{ minWidth: '30rem' }}
                 emptyMessage="אין אירועים להצגה"
                 size='small'
+                scrollable
+                scrollHeight="flex"
             >
-                <Column field="type" header="סוג האירוע" sortable filter filterElement={getFilterElement} />
-                <Column field="farmName" header="חווה" sortable filter filterElement={getFilterElement} />
-                <Column field="status" header="סטטוס" body={statusBodyTemplate} sortable filter filterElement={getFilterElement} />
+                <Column field="type" header="סוג האירוע" sortable />
+                <Column field="farmName" header="חווה" sortable />
+                <Column field="status" header="סטטוס" body={statusBodyTemplate} sortable />
                 <Column field="createdAt" header="נוצר" body={dateBodyTemplate('createdAt')} sortable />
-                <Column field="completedAt" header="טופל" body={dateBodyTemplate('completedAt')} sortable />
+                <Column field="updatedAt" header="עודכן" body={dateBodyTemplate('updatedAt')} sortable />
                 <Column body={(event) => <Button
                     type="button"
                     icon="pi pi-trash"
                     rounded
+                    outlined
                     severity='secondary'
                     size='small'
                     onClick={(nativeEvent) => openRemoveDialog(nativeEvent, event)}
