@@ -5,9 +5,7 @@ import { UtilService } from "./UtilService";
 
 export const FarmService = {
     QueryAll,
-    // Add,
     Update,
-    // Remove
 }
 
 
@@ -44,40 +42,6 @@ function getParsedFarms(): Farm[] {
     const farmsJson = StorageService.load('farms') as string;
     return JSON.parse(farmsJson) as Farm[];
 }
-
-
-// async function Add(productToAdd: Product): Promise<Product> {
-//     const res = new Promise((resolve) => {
-//         productToAdd._id = `p_${Math.floor(Math.random() * 10000)}`
-//         const products = getParsedProducts();
-//         products.push(productToAdd);
-//         StorageService.save('products', products);
-//         const addedProduct = products.find(product => product._id === productToAdd._id);
-//         resolve(addedProduct);
-//     });
-//     const addedProduct = await res as Product;
-//     return addedProduct;
-// }
-
-
-// async function Remove(productToRemove: Product): Promise<Product['_id']> {
-//     const res = new Promise((resolve) => {
-//         const products = getParsedProducts();
-//         const productToRemoveIdx = products.findIndex(product => product._id === productToRemove._id);
-//         products.splice(productToRemoveIdx, 1);
-//         StorageService.save('products', products);
-//         resolve(productToRemove._id);
-//     });
-//     const removedProductId = await res as Product['_id'];
-//     return removedProductId;
-// }
-
-
-// function getParsedProducts() {
-//     const productsJson = StorageService.load('products') as string;
-//     const products = JSON.parse(productsJson) as Product[];
-//     return products;
-// }
 
 
 function getInitialFarms() {

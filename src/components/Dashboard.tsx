@@ -15,10 +15,12 @@ export const Dashboard = () => {
 
 
     useEffect(() => {
-        const data = getData();
-        const options = getOptions();
-        setChartData(data);
-        setChartOptions(options);
+        if (events.length) {
+            const data = getData();
+            const options = getOptions();
+            setChartData(data);
+            setChartOptions(options);
+        }
     }, [events]);
 
 

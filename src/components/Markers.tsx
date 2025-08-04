@@ -49,6 +49,7 @@ export const Markers = (props: Props) => {
         return isPanding ? '#f87171' : isInProgress ? '#fb923c' : isCompleted ? '#4ade80' : '#8f8f8fff';
     };
 
+
     return entities.map(entity => (
         <AdvancedMarker
             key={entity.id}

@@ -1,14 +1,9 @@
-import { InfoWindow } from "@vis.gl/react-google-maps"
+import { InfoWindow } from "@vis.gl/react-google-maps";
+import type { InfoWindowType } from "./FarmMap";
 
 interface Props {
-    infoWindow: {
-        position: {
-            lat: number
-            lng: number
-        };
-        content: string
-    };
-    setInfoWindow: (infoWindow: any) => void
+    infoWindow: InfoWindowType;
+    setInfoWindow: (infoWindow: InfoWindowType | null) => void
 }
 
 export const MapInfoWindow = (props: Props) => {

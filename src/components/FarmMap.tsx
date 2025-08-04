@@ -1,17 +1,24 @@
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import { useAppSelector } from '../hooks/useStoreTypes';
 import { EventAdd } from './EventAdd';
 import { MapInfoWindow } from './MapInfoWindow';
 import { Markers } from './Markers';
+import { MapService } from '../services/MapService';
+
+
+export interface InfoWindowType {
+    position: { lat: number; lng: number }
+    content: JSX.Element
+}
 
 
 export const FarmMap = () => {
-    const API_KEY = 'AIzaSyAv3a3BKdx2ggwqV9QTXx_BcegBYN4fYCg';
-    const MAP_ID = 'b9d8e14e7c57084a79c4c8b6';
     const { farms } = useAppSelector(state => state.farmModule);
     const { events } = useAppSelector(state => state.eventModule);
-    const [infoWindow, setInfoWindow] = useState<any>(null);
+    const [infoWindow, setInfoWindow] = useState<InfoWindowType | null>(null);
+    const API_KEY = MapService.API_KEY;
+    const MAP_ID = MapService.MAP_ID;
 
 
     const handleMapClick = (ev: any) => {
@@ -31,8 +38,8 @@ export const FarmMap = () => {
 
     return (
         <div className="farm-map-container">
-            <APIProvider apiKey={API_KEY} onLoad={() => { }}>
-                {farms.length ? (
+            <APIProvider apiKey={API_KEY}>
+                {farms.length && events.length ? (
                     <Map
                         mapId={MAP_ID}
                         defaultZoom={10}

@@ -1,7 +1,6 @@
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 import { ListBox } from 'primereact/listbox';
-import { useState } from "react";
 import { useAppSelector } from "../hooks/useStoreTypes";
 import { MapService } from '../services/MapService';
 import type { Event } from '../types/Event';
@@ -11,7 +10,6 @@ import type { Farm } from "../types/Farm";
 export const FarmList = () => {
     const { farms } = useAppSelector(state => state.farmModule);
     const { events } = useAppSelector(state => state.eventModule);
-    const [selectedFarm, setSelectedFarm] = useState<Farm[]>([]);
 
 
     const itemTemplate = (farm: Farm) => {
@@ -53,8 +51,6 @@ export const FarmList = () => {
             </div>
             <ListBox
                 options={farms}
-                value={selectedFarm}
-                onChange={(e) => setSelectedFarm(e.value)}
                 optionLabel="name"
                 itemTemplate={itemTemplate}
                 className="w-full md:w-14rem"

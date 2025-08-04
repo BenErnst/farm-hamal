@@ -28,7 +28,7 @@ async function QueryAll(): Promise<Event[]> {
 }
 
 
-async function Add(eventToAdd: Omit<Event, 'id'>): Promise<Event> {
+async function Add(eventToAdd: Event): Promise<Event> {
     return await new Promise((resolve) => {
         const newEvent: Event = {
             ...eventToAdd,

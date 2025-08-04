@@ -12,3 +12,25 @@ export interface GlobalFarmState {
 export interface GlobalEventState {
     events: Event[]
 }
+
+interface SetEventsAction {
+    type: 'SET_EVENTS';
+    events: Event[];
+}
+
+interface AddEventAction {
+    type: 'ADD_EVENT';
+    addedEvent: Event;
+}
+
+export interface UpdateEventAction {
+    type: 'UPDATE_EVENT';
+    updatedEvent: Event;
+}
+
+interface RemoveEventAction {
+    type: 'REMOVE_EVENT';
+    removedEventId: string;
+}
+
+export type EventAction = SetEventsAction | AddEventAction | UpdateEventAction | RemoveEventAction;

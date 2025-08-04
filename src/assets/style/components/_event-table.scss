@@ -23,7 +23,8 @@
     }
     th, tr {
         &:hover {
-            background-color: #1f2937;
+            background-color: #2c3542;
+            transition: all 0.2s;
         }
     }
     .p-selectbutton {
@@ -32,7 +33,7 @@
         justify-content: space-between;
         border: 2px solid #5b6472;
         border-radius: 5px;
-        width: 90%;
+        width: 92%;
         margin: auto;
         .p-button {
             border: none;

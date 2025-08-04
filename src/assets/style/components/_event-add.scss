@@ -1,12 +1,10 @@
 .event-add-form {
     padding: 0;
-    
     h3 {
         margin: 0 0 10px;
         color: var(--primary-color);
         font-size: 1rem;
     }
-    
     .form-field {
         .p-dropdown {
             width: 100%;
@@ -16,7 +14,6 @@
             }
         }
     }
-
     .form-actions {
         margin: 7px 0 3px;
         .p-button {

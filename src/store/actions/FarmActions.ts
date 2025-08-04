@@ -2,6 +2,7 @@ import { FarmService } from "../../services/FarmService";
 import type { Event } from "../../types/Event";
 import type { Farm } from "../../types/Farm";
 import type { AppDispatch } from "../../types/Store";
+import type { RootState } from "../../types/Store";
 
 
 export function loadFarms() {
@@ -19,7 +20,7 @@ export function loadFarms() {
 
 
 export function updateFarmEventIds(farmId: string, eventId: Event['id']) {
-    return async (dispatch: AppDispatch, getState: () => any) => {
+    return async (dispatch: AppDispatch, getState: () => RootState) => {
         try {
             const state = getState();
             const farm = state.farmModule.farms.find((farm: Farm) => farm.id === farmId);

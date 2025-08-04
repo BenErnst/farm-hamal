@@ -16,24 +16,12 @@ export function FarmReducer(state = INITIAL_STATE, action: any): GlobalFarmState
                 farms: [...action.farms]
             };
 
-        case 'ADD_EVENT_TO_FARM':
-            return {
-                ...state,
-                farms: state.farms.map(farm =>
-                    farm.id === action.farmId
-                        ? { ...farm, eventIds: [...farm.eventIds, action.eventId] }
-                        : farm
-                )
-            };
-
         case 'UPDATE_FARM':
             return {
                 ...state,
-                farms: state.farms.map(farm =>
-                    farm.id === action.updatedFarm.id
-                        ? action.updatedFarm
-                        : farm
-                )
+                farms: state.farms.map(farm => {
+                    return farm.id === action.updatedFarm.id ? action.updatedFarm : farm;
+                })
             };
 
         default:

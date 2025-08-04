@@ -9,11 +9,12 @@ import { UtilService } from '../services/UtilService';
 import { addEvent } from '../store/actions/EventActions';
 import type { Event } from '../types/Event';
 import { FormField } from './FormField';
+import type { InfoWindowType } from './FarmMap';
 
 
 interface Props {
     selectedLocation: { lat: number; lng: number; };
-    setInfoWindow: (infoWindow: any) => void;
+    setInfoWindow: (infoWindow: null | InfoWindowType) => void;
 }
 
 

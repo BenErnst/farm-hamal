@@ -1,10 +1,10 @@
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { confirmDialog } from 'primereact/confirmdialog';
-import { DataTable } from 'primereact/datatable';
+import { DataTable, type DataTableRowClickEvent } from 'primereact/datatable';
 import { SelectButton } from 'primereact/selectbutton';
 import { Tag } from 'primereact/tag';
-import { useEffect, useState, type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from "../hooks/useStoreTypes";
 import { MapService } from '../services/MapService';
 import { ToastService } from '../services/ToastService';
@@ -17,7 +17,6 @@ import type { EnrichedEvent, Event } from '../types/Event';
 export const EventTable = () => {
     const dispatch = useAppDispatch();
     const eventsToShow = useAppSelector(selectEnrichedEvents);
-    const [selectedEvent, setSelectedEvent] = useState<EnrichedEvent | null>(null);
     const { he } = UtilService;
     const statusOptions = [
         {
@@ -35,11 +34,10 @@ export const EventTable = () => {
     ];
 
 
-    useEffect(() => {
-        if (selectedEvent) {
-            MapService.zoomTo(selectedEvent.location);
-        }
-    }, [selectedEvent])
+    const handleRowClick = (clickEv: DataTableRowClickEvent) => {
+        const event = clickEv.data as EnrichedEvent;
+        MapService.zoomTo(event.location);
+    };
 
 
     const tableHeader = () => {
@@ -84,16 +82,16 @@ export const EventTable = () => {
 
     const openRemoveDialog = (ev: MouseEvent<HTMLButtonElement>, event: EnrichedEvent) => {
         ev.stopPropagation();
+        const farmName = event.farmName ? `ב-${event.farmName}` : '';
         confirmDialog({
-            message: `האם למחוק את האירוע "${event.type}" ב-${event.farmName}?`,
             header: 'מחיקת אירוע',
+            message: `האם למחוק את האירוע "${event.type}" ${farmName}?`,
             icon: 'pi pi-exclamation-triangle',
             acceptLabel: 'מחק',
             rejectLabel: 'בטל',
             accept: async () => {
                 try {
                     await dispatch(removeEvent(event.id));
-                    setSelectedEvent(null);
                     ToastService.showSuccessMsg('האירוע נמחק בהצלחה.');
                 } catch (err) {
                     ToastService.showErrorMsg('אירעה שגיאה במחיקת האירוע.');
@@ -150,8 +148,7 @@ export const EventTable = () => {
                 footer={tableFooter()}
                 showGridlines
                 selectionMode="single"
-                selection={selectedEvent}
-                onSelectionChange={(e) => setSelectedEvent(e.value as EnrichedEvent | null)}
+                onRowClick={handleRowClick}
                 emptyMessage="אין אירועים להצגה"
                 size='small'
                 scrollable

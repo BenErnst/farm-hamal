@@ -32,15 +32,7 @@ const he = {
 };
 
 
-// const statusSeverityMap = {
-//     pending: 'danger',
-//     inProgress: 'warning',
-//     completed: 'success'
-// }
-
-
 export const UtilService = {
     makeId,
     he,
-    // statusSeverityMap,
 }

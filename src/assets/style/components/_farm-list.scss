@@ -1,5 +1,4 @@
 .farm-list-container {
-    // flex-grow: 1;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: #7d7d7d #1f2937;
@@ -20,7 +19,6 @@
         padding: 0;
     }
     li {
-        // margin: 5px;
         box-shadow: inset 0 0 10px 5px black;
         .farm-item-template {
             display: flex;

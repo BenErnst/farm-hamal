@@ -1,5 +1,4 @@
-import type { Event } from "../../types/Event";
-import type { GlobalEventState } from "../../types/Store";
+import type { EventAction, GlobalEventState } from "../../types/Store";
 
 
 const INITIAL_STATE: GlobalEventState = {
@@ -7,7 +6,7 @@ const INITIAL_STATE: GlobalEventState = {
 };
 
 
-export function EventReducer(state = INITIAL_STATE, action: any): GlobalEventState {
+export function EventReducer(state = INITIAL_STATE, action: EventAction): GlobalEventState {
 
     switch (action.type) {
 
@@ -26,7 +25,9 @@ export function EventReducer(state = INITIAL_STATE, action: any): GlobalEventSta
         case 'UPDATE_EVENT':
             return {
                 ...state,
-                events: mapEvents(state.events, action)
+                events: state.events.map(event => {
+                    return event.id === action.updatedEvent.id ? action.updatedEvent : event;
+                })
             }
 
         case 'REMOVE_EVENT':
@@ -41,9 +42,3 @@ export function EventReducer(state = INITIAL_STATE, action: any): GlobalEventSta
 
 }
 
-
-function mapEvents(events: Event[], action: any) {
-    return events.map(event => {
-        return event.id === action.updatedEvent.id ? action.updatedEvent : event;
-    });
-}
