@@ -1,6 +1,6 @@
 import { EventService } from "../../services/EventService";
 import type { Event } from "../../types/Event";
-import type { AppDispatch, EventFilterBy } from "../../types/Store";
+import type { AppDispatch } from "../../types/Store";
 import { updateFarmEventIds } from "./FarmActions";
 
 
@@ -58,21 +58,5 @@ export function removeEvent(eventToRemoveId: Event['id']) {
             console.error('Error in removeEvent Action:', err);
             throw err;
         }
-    }
-}
-
-
-export function setEventFilterBy(filterBy: Partial<EventFilterBy>) {
-    return (dispatch: AppDispatch) => {
-        const action = { type: 'SET_EVENT_FILTER_BY', filterBy };
-        dispatch(action);
-    }
-}
-
-
-export function clearEventFilterBy() {
-    return (dispatch: AppDispatch) => {
-        const action = { type: 'CLEAR_EVENT_FILTER_BY' };
-        dispatch(action);
     }
 }

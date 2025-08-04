@@ -9,18 +9,6 @@ export interface GlobalFarmState {
     farms: Farm[]
 }
 
-export interface EventFilterBy {
-    type: string[];
-    status: string[];
-    farmName: string[];
-}
-
 export interface GlobalEventState {
-    events: Event[],
-    filterBy: EventFilterBy
+    events: Event[]
 }
-
-
-
-// export type FarmAction = { type: 'ADD_FARM'; entityToAdd: Farm }
-// export type EventAction = { type: 'ADD_EVENT'; entityToAdd: Event }

@@ -3,12 +3,7 @@ import type { GlobalEventState } from "../../types/Store";
 
 
 const INITIAL_STATE: GlobalEventState = {
-    events: [],
-    // filterBy: {
-    //     type: [],
-    //     status: [],
-    //     farmName: []
-    // }
+    events: []
 };
 
 
@@ -38,18 +33,6 @@ export function EventReducer(state = INITIAL_STATE, action: any): GlobalEventSta
             return {
                 ...state,
                 events: state.events.filter(event => event.id !== action.removedEventId)
-            };
-
-        case 'SET_EVENT_FILTER_BY':
-            return {
-                ...state,
-                filterBy: { ...state.filterBy, ...action.filterBy }
-            };
-
-        case 'CLEAR_EVENT_FILTER_BY':
-            return {
-                ...state,
-                filterBy: INITIAL_STATE.filterBy
             };
 
         default:

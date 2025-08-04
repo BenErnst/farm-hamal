@@ -10,15 +10,13 @@ import { MapService } from '../services/MapService';
 import { ToastService } from '../services/ToastService';
 import { UtilService } from '../services/UtilService';
 import { removeEvent, updateEvent } from '../store/actions/EventActions';
-import { selectEnrichedEvents, selectFilteredEvents } from '../store/selectors/eventSelectors';
+import { selectEnrichedEvents } from '../store/selectors/eventSelectors';
 import type { EnrichedEvent, Event } from '../types/Event';
-import { FilterBy } from './FilterBy';
 
 
 export const EventTable = () => {
     const dispatch = useAppDispatch();
-    const eventsToShow = useAppSelector(selectFilteredEvents);
-    const allEnrichedEvents = useAppSelector(selectEnrichedEvents);
+    const eventsToShow = useAppSelector(selectEnrichedEvents);
     const [selectedEvent, setSelectedEvent] = useState<EnrichedEvent | null>(null);
     const { he } = UtilService;
     const statusOptions = [
@@ -144,14 +142,6 @@ export const EventTable = () => {
     }
 
 
-    const getFilterElement = ({ field }: { field: string }) => {
-        return <FilterBy
-            field={field}
-            events={allEnrichedEvents}
-        />
-    };
-
-
     return (
         <div className="event-table-container">
             <DataTable
@@ -159,11 +149,9 @@ export const EventTable = () => {
                 header={tableHeader()}
                 footer={tableFooter()}
                 showGridlines
-                // filterDisplay="row"
                 selectionMode="single"
                 selection={selectedEvent}
                 onSelectionChange={(e) => setSelectedEvent(e.value as EnrichedEvent | null)}
-                // tableStyle={{ minWidth: '30rem' }}
                 emptyMessage="אין אירועים להצגה"
                 size='small'
                 scrollable
