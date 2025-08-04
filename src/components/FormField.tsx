@@ -13,7 +13,6 @@ export const FormField = (props: Props) => {
 
     return (
         <div className="form-field">
-            <label>סוג</label>
             <Controller
                 name={name}
                 control={form.control}
