@@ -1,13 +1,21 @@
 .home-container {
     height: 90vh;
     display: flex;
-    justify-content: space-between;
+    gap: 25px;
     margin: 10px;
     main {
-        // background-color: #424242;
         display: flex;
         gap: 10px;
         width: 65%;
-        // height: 100%;
     }
+    .map-dashboard-conatiner {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.p-toast-message-content {
+    line-height: 2;
 }

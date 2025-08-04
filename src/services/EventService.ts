@@ -7,8 +7,7 @@ export const EventService = {
     QueryAll,
     Add,
     Update,
-    Remove,
-    filterByIds
+    Remove
 }
 
 
@@ -43,20 +42,6 @@ async function Add(eventToAdd: Omit<Event, 'id'>): Promise<Event> {
 }
 
 
-// async function Add(productToAdd: Product): Promise<Product> {
-//     const res = new Promise((resolve) => {
-//         productToAdd._id = `p_${ Math.floor(Math.random() * 10000) } `
-//         const products = getParsedProducts();
-//         products.push(productToAdd);
-//         StorageService.save('products', products);
-//         const addedProduct = products.find(product => product._id === productToAdd._id);
-//         resolve(addedProduct);
-//     });
-//     const addedProduct = await res as Product;
-//     return addedProduct;
-// }
-
-
 async function Update(eventToUpdate: Event): Promise<Event> {
     return await new Promise((resolve) => {
         const events = getParsedEvents();
@@ -76,15 +61,6 @@ async function Remove(eventToRemoveId: Event['id']): Promise<Event['id']> {
         events.splice(eventToRemoveIdx, 1);
         StorageService.save('events', events);
         resolve(eventToRemoveId);
-    });
-}
-
-
-async function filterByIds(eventIds: Event['id'][]): Promise<Event[]> {
-    return await new Promise((resolve) => {
-        const events = getParsedEvents();
-        const filteredEvents = events.filter(event => eventIds.includes(event.id));
-        resolve(filteredEvents);
     });
 }
 
@@ -173,7 +149,7 @@ function getInitialEvents() {
         {
             id: 'e_10',
             location: { lng: 35.1058087765503, lat: 32.5894634608399 },
-            type: he.eventType.fenceCut,
+            type: he.eventType.protectionThreat,
             status: 'pending',
             createdAt: 1752400242000,
             updatedAt: 1752400242000

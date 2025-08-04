@@ -29,17 +29,17 @@
     .p-selectbutton {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         border: 2px solid #5b6472;
         border-radius: 5px;
-        width: 85%;
+        width: 90%;
         margin: auto;
         .p-button {
             border: none;
             border-radius: 0;
             transition: none;
-            width: 101px;
             opacity: 0.5;
+            width: 40%;
             &.p-highlight {
                 opacity: 1;
                 border: none;

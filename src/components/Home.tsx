@@ -1,3 +1,4 @@
+import { Dashboard } from "./Dashboard"
 import { EventTable } from "./EventTable"
 import { FarmList } from "./FarmList"
 import { FarmMap } from "./FarmMap"
@@ -8,9 +9,11 @@ export const Home = () => {
             <main>
                 <FarmList />
                 <EventTable />
-                {/* <Dashboard /> */}
             </main>
-            <FarmMap />
+            <section className="map-dashboard-conatiner">
+                <FarmMap />
+                <Dashboard />
+            </section>
         </div>
     )
 }
