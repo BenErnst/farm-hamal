@@ -1,4 +1,4 @@
-import type { GlobalFarmState } from "../../types/Store";
+import type { FarmAction, GlobalFarmState } from "../../types/Store";
 
 
 const INITIAL_STATE = {
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 } as GlobalFarmState;
 
 
-export function FarmReducer(state = INITIAL_STATE, action: any): GlobalFarmState {
+export function FarmReducer(state = INITIAL_STATE, action: FarmAction): GlobalFarmState {
 
     switch (action.type) {
 

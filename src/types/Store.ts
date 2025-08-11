@@ -5,9 +5,25 @@ import type { Farm } from './Farm.ts';
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
+// FARM:
+
 export interface GlobalFarmState {
     farms: Farm[]
 }
+
+export type FarmAction = SetFarmsAction | UpdateFarmAction;
+
+interface SetFarmsAction {
+    type: 'SET_FARMS';
+    farms: Farm[];
+}
+
+interface UpdateFarmAction {
+    type: 'UPDATE_FARM';
+    updatedFarm: Farm;
+}
+
+// EVENT:
 
 export interface GlobalEventState {
     events: Event[]

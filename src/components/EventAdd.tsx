@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from 'primereact/button';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useAppDispatch, useAppSelector } from '../hooks/useStoreTypes';
 import { ToastService } from '../services/ToastService';
@@ -45,7 +45,7 @@ export const EventAdd = (props: Props) => {
     useEffect(() => {
         if (farms.length) {
             const closestFarm = farms.reduce((prevFarm, currFarm) => {
-                const prevDist = Math.abs(selectedLocation.lat - prevFarm.location.lat) + Math.abs(selectedLocation.lng - prevFarm.location.lng);
+                const prevDist = Math.abs(selectedLocation.lat - prevFarm?.location.lat) + Math.abs(selectedLocation.lng - prevFarm?.location.lng);
                 const currDist = Math.abs(selectedLocation.lat - currFarm.location.lat) + Math.abs(selectedLocation.lng - currFarm.location.lng);
                 return prevDist < currDist ? prevFarm : currFarm;
             });
@@ -78,23 +78,25 @@ export const EventAdd = (props: Props) => {
 
             <h3>אירוע חדש</h3>
 
-            <FormField
-                name="type"
-                form={form}
-                options={[
-                    { label: he.eventType.fire, value: 'שריפה' },
-                    { label: he.eventType.theft, value: 'גניבה' },
-                    { label: he.eventType.fenceCut, value: 'חיתוך גדר' },
-                    { label: he.eventType.protectionThreat, value: 'פרוטקשן' },
-                    { label: he.eventType.herdInvasion, value: 'פלישת עדר' }
-                ]}
-            />
+            <FormProvider {...form}>
 
-            <FormField
-                name="farmId"
-                form={form}
-                options={farms.map(farm => ({ label: farm.name, value: farm.id }))}
-            />
+                <FormField
+                    name="type"
+                    options={[
+                        { label: he.eventType.fire, value: 'שריפה' },
+                        { label: he.eventType.theft, value: 'גניבה' },
+                        { label: he.eventType.fenceCut, value: 'חיתוך גדר' },
+                        { label: he.eventType.protectionThreat, value: 'פרוטקשן' },
+                        { label: he.eventType.herdInvasion, value: 'פלישת עדר' }
+                    ]}
+                />
+
+                <FormField
+                    name="farmId"
+                    options={farms.map(farm => ({ label: farm.name, value: farm.id }))}
+                />
+
+            </FormProvider>
 
             <div className="form-actions">
                 <Button
