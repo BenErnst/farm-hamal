@@ -1,7 +1,7 @@
 export class MapService {
     static map: google.maps.Map | null = null;
-    static API_KEY = 'AIzaSyAv3a3BKdx2ggwqV9QTXx_BcegBYN4fYCg';
-    static MAP_ID = 'b9d8e14e7c57084a79c4c8b6';
+    static API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
+    static MAP_ID = import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || 'b9d8e14e7c57084a79c4c8b6';
 
     static setMap(mapInstance: google.maps.Map) {
         this.map = mapInstance;
