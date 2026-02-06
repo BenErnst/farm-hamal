@@ -10,8 +10,8 @@ import { MapService } from '../services/MapService';
 import { ToastService } from '../services/ToastService';
 import { UtilService } from '../services/UtilService';
 import { removeEvent, updateEvent } from '../store/actions/EventActions';
-import { selectEnrichedEvents } from '../store/selectors/eventSelectors';
 import type { EnrichedEvent, Event } from '../types/Event';
+import { selectEnrichedEvents } from '../store/selectors/EventSelectors';
 
 
 export const EventTable = () => {

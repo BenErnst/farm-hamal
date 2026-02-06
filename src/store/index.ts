@@ -13,4 +13,7 @@ export const store = configureStore({
     devTools: true
 });
 
-window.myStore = store;
+// Expose store to window for debugging (development only)
+if (import.meta.env.DEV) {
+    (window as any).myStore = store;
+}
