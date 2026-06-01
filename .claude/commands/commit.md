@@ -1,0 +1,1 @@
+Stage all tracked changes with `git add -u`, then run `git diff --cached` to understand what changed. Write a concise commit message in imperative mood (subject ≤72 chars; add a short body only if the change needs explanation). Commit with that message, then push to the current remote branch. Show git status before and after. Do not use --no-verify or skip hooks.
