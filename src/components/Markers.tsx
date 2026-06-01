@@ -1,7 +1,8 @@
 import { AdvancedMarker, Pin, useMap } from '@vis.gl/react-google-maps';
 import { useCallback, useEffect } from "react";
-import { useAppDispatch } from "../hooks/useStoreTypes";
+import { useAppDispatch, useAppSelector } from "../hooks/useStoreTypes";
 import { MapService } from '../services/MapService';
+import { ToastService } from '../services/ToastService';
 import { updateEvent } from "../store/actions/EventActions";
 import type { Event } from "../types/Event";
 import type { Farm } from "../types/Farm";
@@ -17,6 +18,7 @@ export const Markers = (props: Props) => {
     const { entities, whichEntity } = props;
     const dispatch = useAppDispatch();
     const map = useMap();
+    const farms = useAppSelector(state => state.farmModule.farms);
 
 
     useEffect(() => {
@@ -33,13 +35,15 @@ export const Markers = (props: Props) => {
     }, [map]);
 
 
-    const handleDragEnd = useCallback((ev: google.maps.MapMouseEvent, entity: Farm | Event) => {
+    const handleDragEnd = useCallback(async (ev: google.maps.MapMouseEvent, entity: Farm | Event) => {
         if (map && ev.latLng) {
             const newMarkerLocation = ev.latLng.toJSON();
-            const eventToUpdate = { ...entity, location: newMarkerLocation } as Event; // only event is draggable
-            dispatch(updateEvent(eventToUpdate));
+            const eventToUpdate = { ...entity, location: newMarkerLocation } as Event;
+            await dispatch(updateEvent(eventToUpdate));
+            const farmName = farms.find(f => f.eventIds.includes((entity as Event).id))?.name ?? 'לא משויך';
+            ToastService.showSuccessMsg(`מיקום האירוע עודכן: ${(entity as Event).type} | חווה: ${farmName}`);
         }
-    }, [map]);
+    }, [map, farms]);
 
 
     const getPinBackground = (entity: Farm | Event) => {
