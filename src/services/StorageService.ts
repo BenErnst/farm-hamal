@@ -1,13 +1,13 @@
 export const StorageService = {
-    save,
-    load
-}
+  save,
+  load,
+};
 
 function save(key: string, value: any) {
-    const valueJson = JSON.stringify(value);
-    localStorage.setItem(key, valueJson);
+  const valueJson = JSON.stringify(value);
+  localStorage.setItem(key, valueJson);
 }
 
 function load(key: string) {
-    return localStorage.getItem(key);
+  return localStorage.getItem(key);
 }

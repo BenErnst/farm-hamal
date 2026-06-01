@@ -1,24 +1,24 @@
 .event-add-form {
-    padding: 0;
-    h3 {
-        margin: 0 0 10px;
-        color: var(--primary-color);
-        font-size: 1rem;
+  padding: 0;
+  h3 {
+    margin: 0 0 10px;
+    color: var(--primary-color);
+    font-size: 1rem;
+  }
+  .form-field {
+    .p-dropdown {
+      width: 100%;
+      margin: 3px 0;
+      span {
+        font-size: 14px;
+      }
     }
-    .form-field {
-        .p-dropdown {
-            width: 100%;
-            margin: 3px 0;
-            span {
-                font-size: 14px;
-            }
-        }
+  }
+  .form-actions {
+    margin: 7px 0 3px;
+    .p-button {
+      width: 50%;
+      padding: 10px;
     }
-    .form-actions {
-        margin: 7px 0 3px;
-        .p-button {
-            width: 50%;
-            padding: 10px;
-        }
-    }
+  }
 }

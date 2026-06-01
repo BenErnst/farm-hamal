@@ -1,14 +1,14 @@
 // Setup
-@use 'setup/variables';
+@use "setup/variables";
 
 // Basics
-@use 'basics/base';
-@use 'basics/typography';
+@use "basics/base";
+@use "basics/typography";
 
 // Components
-@use 'components/home';
-@use 'components/app-header';
-@use 'components/farm-map';
-@use 'components/event-add';
-@use 'components/event-table';
-@use 'components/farm-list';
+@use "components/home";
+@use "components/app-header";
+@use "components/farm-map";
+@use "components/event-add";
+@use "components/event-table";
+@use "components/farm-list";
