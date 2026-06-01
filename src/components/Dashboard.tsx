@@ -73,9 +73,13 @@ export const Dashboard = () => {
     );
   };
 
+  const isChartReady = "datasets" in chartData;
+
   return (
     <div className="card">
-      <Chart type="bar" data={chartData} options={chartOptions} />
+      {isChartReady && (
+        <Chart type="bar" data={chartData} options={chartOptions} />
+      )}
     </div>
   );
 };
