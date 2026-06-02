@@ -14,6 +14,10 @@ npm run deploy    # Build + publish to GitHub Pages via gh-pages
 
 There are no tests in this project.
 
+## Git
+
+Before every commit, present the proposed commit message to the user and wait for explicit approval before running `git commit`.
+
 ## Environment Variables
 
 The app requires a `.env` file at the root:
