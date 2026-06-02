@@ -1,0 +1,69 @@
+@use "../setup/variables";
+
+.data-query-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  direction: rtl;
+
+  .data-query-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .data-query-input {
+      flex: 1;
+      font-size: 14px;
+    }
+  }
+
+  .data-query-spinner {
+    width: 32px;
+    height: 32px;
+    align-self: center;
+    margin-top: 8px;
+  }
+
+  .data-query-answer {
+    color: variables.$primaryTxt;
+    font-size: 14px;
+    line-height: 1.7;
+    background: variables.$bodyBg;
+    border-radius: 6px;
+    padding: 10px 12px;
+    overflow-y: auto;
+    flex: 1;
+    white-space: pre-wrap;
+    width: inherit;
+  }
+
+  .data-query-error {
+    color: #f87171;
+    font-size: 13px;
+  }
+}
+
+.dashboard-container {
+  height: 64%;
+
+  .p-tabview-panels {
+    padding: 8px 0 0 0;
+    background: transparent;
+  }
+
+  .p-tabview-nav-container {
+    background: transparent;
+  }
+
+  .p-tabview-nav {
+    background: transparent;
+    border-bottom: 1px solid variables.$panelsBg;
+    justify-content: center;
+  }
+
+  .p-tabview-nav-link.p-tabview-nav-link {
+    background: transparent;
+    font-size: 13px;
+  }
+}

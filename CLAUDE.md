@@ -60,3 +60,5 @@ Clicking anywhere on the Google Map opens an `EventAdd` form inside a `MapInfoWi
 ### Styling
 
 SCSS with a `global.scss` entry point that imports partials in order: `setup/_variables` → `basics/` → `components/`. Each component has a corresponding partial in `src/assets/style/components/`. PrimeReact theme is imported globally in `App.tsx`.
+
+Never use `!important`. To override PrimeReact specificity, double the class selector (e.g. `.p-foo.p-foo`) or nest under a container class — both raise specificity without `!important`.

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Chart } from "primereact/chart";
+import { TabView, TabPanel } from "primereact/tabview";
 import { UtilService } from "../services/UtilService";
 import { useAppSelector } from "../hooks/useStoreTypes";
+import { DataQuery } from "./DataQuery";
 
 export const Dashboard = () => {
   const { events } = useAppSelector((state) => state.eventModule);
@@ -76,10 +78,17 @@ export const Dashboard = () => {
   const isChartReady = "datasets" in chartData;
 
   return (
-    <div className="card">
-      {isChartReady && (
-        <Chart type="bar" data={chartData} options={chartOptions} />
-      )}
+    <div className="card dashboard-container">
+      <TabView>
+        <TabPanel header={he.chartTab}>
+          {isChartReady && (
+            <Chart type="bar" data={chartData} options={chartOptions} />
+          )}
+        </TabPanel>
+        <TabPanel header={he.queryTab}>
+          <DataQuery />
+        </TabPanel>
+      </TabView>
     </div>
   );
 };

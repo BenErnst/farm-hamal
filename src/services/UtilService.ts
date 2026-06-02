@@ -29,6 +29,11 @@ const he = {
     inProgress: "בטיפול",
     completed: "טופל",
   },
+  queryPlaceholder: "שאל שאלה על הנתונים...",
+  queryTab: "שאילתה",
+  chartTab: "גרף",
+  queryError: "שגיאה בפנייה לשירות AI. נסה שוב.",
+  queryFallback: "לא הצלחתי לענות על השאלה.",
 };
 
 export const UtilService = {
