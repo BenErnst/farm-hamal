@@ -1,4 +1,4 @@
-# Farm Hamal (חמ"ל חוות)
+# Farm Hamal (חמ"ל חקלאים)
 
 A situation-room dashboard for monitoring security incidents across a network of farms — fires, thefts, fence cuts, herd invasions, and extortion attempts — plotted live on a map. Built as a client-only React app with no backend; all data is seeded into and persisted through `localStorage`.
 
