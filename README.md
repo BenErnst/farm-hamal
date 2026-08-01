@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# Farm Hamal (חמ"ל חוות)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A situation-room dashboard for monitoring security incidents across a network of farms — fires, thefts, fence cuts, herd invasions, and extortion attempts — plotted live on a map. Built as a client-only React app with no backend; all data is seeded into and persisted through `localStorage`.
 
-Currently, two official plugins are available:
+🔗 **Live demo:** [benernst.github.io/farm-hamal](https://benernst.github.io/farm-hamal/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Interactive map** (Google Maps) showing every farm and every reported event, with marker clustering.
+- **Report an event** by clicking anywhere on the map — a form opens at that exact location and auto-selects the nearest farm.
+- **Farm list** and **event table** views for browsing and managing records directly.
+- **Dashboard** with a live chart breaking down events by type.
+- Fully **Hebrew UI**, right-to-left.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+- [React 19](https://react.dev/) + TypeScript + [Vite](https://vite.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/) (hand-written actions/reducers, thunks over async services)
+- [PrimeReact](https://primereact.org/) (lara-dark-blue theme) + SCSS
+- [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) for form validation
+- [`@vis.gl/react-google-maps`](https://visgl.github.io/react-google-maps/) for the map
+- [Chart.js](https://www.chartjs.org/) (via PrimeReact) for the dashboard chart
+
+## Getting started
+
+### Prerequisites
+
+You'll need a Google Maps API key and a Map ID. Create a `.env` file at the project root:
+
+```
+VITE_GOOGLE_MAPS_API_KEY=your-api-key
+VITE_GOOGLE_MAPS_MAP_ID=your-map-id
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The map will not render without a valid key.
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+### Install & run
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```bash
+npm install
+npm run dev       # start the dev server (Vite HMR)
 ```
+
+### Other scripts
+
+```bash
+npm run build     # type-check, then build for production
+npm run lint       # run ESLint
+npm run preview   # preview the production build locally
+npm run deploy    # build and publish to GitHub Pages via gh-pages
+```
+
+There are no automated tests in this project.
+
+## Architecture notes
+
+- **No backend.** `FarmService` and `EventService` simulate async CRUD over `localStorage` (via `StorageService`), seeding hardcoded initial data on first load.
+- **Loosely coupled entities.** A `Farm` holds an array of `eventIds`; an `Event` holds a `location` but no `farmId`. The join happens at read time via a reselect selector that matches each event back to its owning farm.
+- **Redux**, but not `createSlice` — plain `configureStore` + `combineReducers`, hand-written action type strings, and thunks that call services before dispatching.
+- **Hebrew labels** (farm types, event types, statuses) live in one place, `UtilService.he`, and are also the actual values persisted in `localStorage`.
+
+See [CLAUDE.md](./CLAUDE.md) for the full architecture writeup.
