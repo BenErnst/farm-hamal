@@ -29,7 +29,7 @@ const he = {
     inProgress: "בטיפול",
     completed: "טופל",
   },
-  queryPlaceholder: "שאל שאלה על הנתונים...",
+  queryPlaceholder: 'למשל: "כמה אירועי שריפה טרם טופלו?"',
   queryTab: "שאילתה",
   chartTab: "גרף",
   queryError: "שגיאה בפנייה לשירות AI. נסה שוב.",
